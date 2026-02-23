@@ -122,7 +122,7 @@ export default function HomePage() {
                         Cinnamon Roll Pistache
                       </h3>
                       <p className="text-body mb-6">
-                        Brioche à la cannelle, glaçage pistache maison. Notre signature, un mariage parfait entre l'onctuosité de la brioche et la subtilité de la pistache.
+                        Brioche à la cannelle, glaçage pistache maison. Notre signature, un mariage parfait entre l&apos;onctuosité de la brioche et la subtilité de la pistache.
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-coral">5.50€</span>
