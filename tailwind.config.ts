@@ -17,6 +17,7 @@ const config: Config = {
         pistache: '#B8C99A',
         vanilla: '#FFF8F0',
         beige: '#E5BE9E',
+        coral: '#F79F79',
         primary: '#8E593A',
       },
       fontFamily: {

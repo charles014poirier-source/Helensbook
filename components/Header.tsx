@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import siteData from '@/lib/siteData';
@@ -35,11 +36,18 @@ export default function Header() {
       <nav className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link
-            href="/"
-            className="font-serif text-xl md:text-2xl font-semibold text-espresso hover:text-caramel transition-colors"
-          >
-            {siteData.name}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 md:w-12 md:h-12 p-1.5 bg-vanilla/50 rounded-full backdrop-blur-sm border-2 border-coffee/20">
+              <Image
+                src="/helens_book_white_bg.png"
+                alt={siteData.name}
+                fill
+                className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
+            <span className="font-serif text-xl md:text-2xl font-semibold text-espresso group-hover:text-caramel transition-colors">
+              {siteData.name}
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -63,7 +71,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <InteractiveHoverButton text="Nous trouver" className="border-caramel text-coffee hover:text-white" />
+              <InteractiveHoverButton text="Nous trouver" className="border-caramel text-coffee hover:text-white pl-6" />
             </a>
           </div>
 

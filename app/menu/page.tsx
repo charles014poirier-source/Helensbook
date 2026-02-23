@@ -34,7 +34,7 @@ export default function MenuPage() {
           </div>
           <div className="relative z-10 section-inner">
             <div className="max-w-4xl mx-auto text-center text-cream">
-              <p className="font-hand text-2xl text-caramel mb-2">Nos créations</p>
+              <p className="font-hand text-2xl text-cream mb-2">Nos créations</p>
               <h1 className="heading-xl mb-6 text-cream">Le Menu</h1>
               <p className="text-lead text-cream/90 mb-8">
                 Des pâtisseries faites maison avec amour, des boissons chaudes réconfortantes.

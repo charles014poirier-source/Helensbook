@@ -12,6 +12,7 @@
     --color-pistache: #B8C99A;
     --color-vanilla: #FFF8F0;
     --color-beige: #E5BE9E;
+    --color-coral: '#F79F79';
   }
 
   * {
@@ -79,7 +80,7 @@
 
   .badge-best-seller {
     @apply inline-flex items-center gap-1 px-2.5 py-1
-           bg-caramel/10 text-caramel text-sm font-medium rounded-full;
+           bg-coral/10 text-coral text-sm font-medium rounded-full;
   }
 
   /* Section container */
@@ -153,5 +154,5 @@
 
 /* Selection */
 ::selection {
-  @apply bg-caramel/30 text-coffee;
+  @apply bg-coral/30 text-coffee;
 }
