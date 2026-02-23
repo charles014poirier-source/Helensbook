@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   description: siteData.seo.description,
   keywords: [...siteData.seo.keywords],
   authors: [{ name: siteData.name }],
+  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
   openGraph: {
     title: siteData.seo.title,
     description: siteData.seo.description,

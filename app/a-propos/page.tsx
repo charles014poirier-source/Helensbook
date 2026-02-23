@@ -189,9 +189,9 @@ export default function AboutPage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/5 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="section-inner relative z-10 py-12">
+          <div className="section-inner relative z-10 py-8 md:py-12">
             <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
                 {/* Left Content */}
                 <div className="text-center lg:text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-coral/20 rounded-full text-coral text-xs font-medium mb-4">
@@ -201,11 +201,11 @@ export default function AboutPage() {
                     Prêt pour une pause gourmande ?
                   </div>
 
-                  <h2 className="heading-lg mb-4 text-cream">
+                  <h2 className="heading-lg mb-3 md:mb-4 text-cream text-xl md:text-2xl lg:text-3xl">
                     Une parenthèse douce au cœur du Quartier Latin
                   </h2>
 
-                  <p className="text-base text-cream/80 mb-6 leading-relaxed">
+                  <p className="text-sm md:text-base text-cream/80 mb-4 md:mb-6 leading-relaxed">
                     Venez découvrir nos pâtisseries faites maison, nos boissons artisanales et notre ambiance cosy.
                   </p>
 
@@ -322,16 +322,16 @@ export default function AboutPage() {
                   </div>
 
                   {/* Compact Floating Badge */}
-                  <div className="absolute -bottom-4 -right-4 bg-coral text-white px-4 py-2 rounded-xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                    <div className="flex items-center gap-2">
+                  <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-coral text-white px-3 py-1.5 md:px-4 md:py-2 rounded-xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                    <div className="flex items-center gap-1.5 md:gap-2">
                       <div className="flex -space-x-1">
                         {[...Array(3)].map((_, i) => (
-                          <div key={i} className="w-5 h-5 rounded-full bg-white/20 border border-white"></div>
+                          <div key={i} className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-white/20 border border-white"></div>
                         ))}
                       </div>
                       <div>
-                        <p className="text-[10px] opacity-90">Note</p>
-                        <p className="text-sm font-bold">4.9 ★</p>
+                        <p className="text-[9px] md:text-[10px] opacity-90">Note</p>
+                        <p className="text-xs md:text-sm font-bold">4.9 ★</p>
                       </div>
                     </div>
                   </div>

@@ -98,16 +98,16 @@ export default function MenuPage() {
         <section className="section">
           <div className="section-inner">
             <div className="max-w-4xl mx-auto">
-              <h2 className="heading-md mb-8 text-center">{categories[activeCategory].category}</h2>
+              <h2 className="heading-md mb-6 md:mb-8 text-center text-xl md:text-2xl">{categories[activeCategory].category}</h2>
 
-              <div className="grid gap-6">
+              <div className="grid gap-4 md:gap-6">
                 {currentItems.map((item, index) => (
                   <div
                     key={index}
-                    className="card p-6 flex flex-col sm:flex-row gap-6 hover:shadow-lg transition-all duration-300"
+                    className="card p-4 md:p-6 flex flex-col sm:flex-row gap-4 md:gap-6 hover:shadow-lg transition-all duration-300"
                   >
                     {/* Image */}
-                    <div className="sm:w-48 sm:h-48 aspect-square sm:aspect-auto relative shrink-0 rounded-xl overflow-hidden bg-coffee/5">
+                    <div className="sm:w-40 sm:h-40 md:w-48 md:h-48 aspect-square sm:aspect-auto relative shrink-0 rounded-xl overflow-hidden bg-coffee/5">
                       <Image
                         src={
                           item.name.toLowerCase().includes('matcha') ? 'https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400&q=80' :
@@ -129,10 +129,10 @@ export default function MenuPage() {
                     {/* Content */}
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
-                        <div className="flex items-start justify-between gap-4 mb-2">
-                          <h3 className="heading-sm">{item.name}</h3>
+                        <div className="flex items-start justify-between gap-2 md:gap-4 mb-2">
+                          <h3 className="heading-sm text-base md:text-lg">{item.name}</h3>
                           {item.price && (
-                            <span className="text-lg font-semibold text-caramel shrink-0">
+                            <span className="text-base md:text-lg font-semibold text-caramel shrink-0">
                               {item.price}
                             </span>
                           )}
@@ -140,7 +140,7 @@ export default function MenuPage() {
 
                         {/* Tags */}
                         {item.tags && item.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-2 mb-3">
+                          <div className="flex flex-wrap gap-1.5 md:gap-2 mb-2 md:mb-3">
                             {item.tags.map(tag => (
                               <span key={tag} className={
                                 tag === 'vegan' ? 'badge-vegan' :
@@ -184,10 +184,10 @@ export default function MenuPage() {
         {/* Section ambiance - Pour embellir la page */}
         <section className="section bg-cream">
           <div className="section-inner">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center p-6">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-caramel/10 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+              <div className="text-center p-4 md:p-6">
+                <div className="w-14 h-14 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 rounded-full bg-caramel/10 flex items-center justify-center">
+                  <svg className="w-7 h-7 md:w-8 md:h-8 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>

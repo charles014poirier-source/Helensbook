@@ -23,10 +23,10 @@ export default function ContactPage() {
         {/* Hero */}
         <section className="section bg-vanilla">
           <div className="section-inner">
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="font-hand text-2xl text-caramel mb-2">Infos pratiques</p>
-              <h1 className="heading-xl mb-6">Contact & Accès</h1>
-              <p className="text-lead text-coffee/80">
+            <div className="max-w-3xl mx-auto text-center px-4">
+              <p className="font-hand text-xl md:text-2xl text-caramel mb-2">Infos pratiques</p>
+              <h1 className="heading-xl mb-4 md:mb-6 text-2xl md:text-4xl">Contact & Accès</h1>
+              <p className="text-lead text-coffee/80 text-base md:text-lg">
                 On vous accueille du mardi au dimanche dans le 5e arrondissement de Paris.
               </p>
             </div>
@@ -52,9 +52,9 @@ export default function ContactPage() {
         {/* Info Cards */}
         <section className="section bg-vanilla">
           <div className="section-inner">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
               {/* Address */}
-              <div className="card p-8 text-center">
+              <div className="card p-6 md:p-8 text-center">
                 <div className="w-12 h-12 bg-caramel/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -77,7 +77,7 @@ export default function ContactPage() {
               </div>
 
               {/* Hours */}
-              <div className="card p-8 text-center">
+              <div className="card p-6 md:p-8 text-center">
                 <div className="w-12 h-12 bg-caramel/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -100,7 +100,7 @@ export default function ContactPage() {
               </div>
 
               {/* Contact */}
-              <div className="card p-8 text-center">
+              <div className="card p-6 md:p-8 text-center">
                 <div className="w-12 h-12 bg-caramel/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg className="w-6 h-6 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

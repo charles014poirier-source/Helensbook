@@ -37,19 +37,19 @@
 @layer components {
   /* Primary button */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3
+    @apply inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3
            bg-caramel text-white font-medium rounded-lg
            hover:bg-coffee hover:scale-[1.02] active:scale-[0.98]
-           transition-all duration-200 ease-out
+           transition-all duration-200 ease-out text-sm sm:text-base
            focus-visible:ring-2 focus-visible:ring-coffee focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
   }
 
   /* Secondary button */
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3
+    @apply inline-flex items-center justify-center px-4 py-2 sm:px-6 sm:py-3
            border-2 border-coffee text-coffee font-medium rounded-lg
            hover:bg-coffee hover:text-white hover:scale-[1.02] active:scale-[0.98]
-           transition-all duration-200 ease-out
+           transition-all duration-200 ease-out text-sm sm:text-base
            focus-visible:ring-2 focus-visible:ring-coffee focus-visible:ring-offset-2 focus-visible:ring-offset-cream;
   }
 
@@ -69,23 +69,23 @@
 
   /* Badge styles */
   .badge-vegan {
-    @apply inline-flex items-center gap-1 px-2.5 py-1
-           bg-sage/10 text-sage text-sm font-medium rounded-full;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 md:px-2.5 md:py-1
+           bg-sage/10 text-sage text-xs md:text-sm font-medium rounded-full;
   }
 
   .badge-sg {
-    @apply inline-flex items-center gap-1 px-2.5 py-1
-           bg-pistache/10 text-pistache text-sm font-medium rounded-full;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 md:px-2.5 md:py-1
+           bg-pistache/10 text-pistache text-xs md:text-sm font-medium rounded-full;
   }
 
   .badge-best-seller {
-    @apply inline-flex items-center gap-1 px-2.5 py-1
-           bg-coral/10 text-coral text-sm font-medium rounded-full;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 md:px-2.5 md:py-1
+           bg-coral/10 text-coral text-xs md:text-sm font-medium rounded-full;
   }
 
   /* Section container */
   .section {
-    @apply py-16 px-4 md:px-6 lg:px-8;
+    @apply py-12 md:py-16 px-4 md:px-6 lg:px-8;
   }
 
   .section-inner {
@@ -94,32 +94,32 @@
 
   /* Heading styles */
   .heading-xl {
-    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-semibold
+    @apply font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold
            text-espresso leading-tight;
   }
 
   .heading-lg {
-    @apply font-serif text-3xl md:text-4xl font-semibold
+    @apply font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold
            text-espresso leading-tight;
   }
 
   .heading-md {
-    @apply font-serif text-2xl md:text-3xl font-semibold
+    @apply font-serif text-xl md:text-2xl lg:text-3xl font-semibold
            text-espresso leading-tight;
   }
 
   .heading-sm {
-    @apply font-serif text-xl md:text-2xl font-semibold
+    @apply font-serif text-lg md:text-xl lg:text-2xl font-semibold
            text-espresso;
   }
 
   /* Text styles */
   .text-lead {
-    @apply text-lg md:text-xl text-coffee/80 leading-relaxed;
+    @apply text-base sm:text-lg md:text-xl text-coffee/80 leading-relaxed;
   }
 
   .text-body {
-    @apply text-base text-coffee/70 leading-relaxed;
+    @apply text-sm sm:text-base text-coffee/70 leading-relaxed;
   }
 
   /* Link styles */

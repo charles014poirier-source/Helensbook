@@ -21,7 +21,7 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative h-[85vh] min-h-[600px] flex items-center justify-center">
+        <section className="relative h-[70vh] md:h-[85vh] min-h-[500px] md:min-h-[600px] flex items-center justify-center">
           {/* Carousel Background */}
           <Carousel
             interval={2000}
@@ -38,20 +38,20 @@ export default function HomePage() {
           />
 
           {/* Content */}
-          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <h1 className="heading-xl mb-6 animate-fade-in">
+          <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+            <h1 className="heading-xl mb-4 md:mb-6 animate-fade-in text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               {h1}
             </h1>
-            <p className="text-lead text-espresso mb-8 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <p className="text-lead text-espresso mb-6 md:mb-8 animate-slide-up text-base sm:text-lg" style={{ animationDelay: '0.2s' }}>
               {slogan}
             </p>
 
             {/* Highlights */}
-            <div className="flex flex-wrap justify-center gap-3 mb-10 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-10 animate-slide-up" style={{ animationDelay: '0.4s' }}>
               {siteData.highlights.slice(0, 3).map((highlight, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-espresso/80 backdrop-blur-sm rounded-full text-sm font-medium text-cream shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 bg-espresso/80 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-cream shadow-sm"
                 >
                   <span>{highlight.icon}</span>
                   {highlight.text}
@@ -60,9 +60,9 @@ export default function HomePage() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
               <Link href="/menu" className="inline-flex items-center justify-center">
-                <ShinyButton variant="caramel" className="px-8 py-3 text-base">
+                <ShinyButton variant="caramel" className="px-6 py-2.5 md:px-8 md:py-3 text-sm md:text-base">
                   Voir la carte
                 </ShinyButton>
               </Link>
@@ -70,9 +70,9 @@ export default function HomePage() {
                 href={siteData.socials.googleMaps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 px-8 py-3 bg-white text-espresso font-semibold rounded-full hover:bg-cream hover:scale-105 transition-all duration-300 shadow-lg"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 md:px-8 md:py-3 bg-white text-espresso font-semibold rounded-full hover:bg-cream hover:scale-105 transition-all duration-300 shadow-lg text-sm md:text-base"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -337,9 +337,9 @@ export default function HomePage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/5 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="section-inner relative z-10 py-12">
+          <div className="section-inner relative z-10 py-8 md:py-12">
             <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
                 {/* Left Content */}
                 <div className="text-center lg:text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-coral/20 rounded-full text-coral text-xs font-medium mb-4">
@@ -349,11 +349,11 @@ export default function HomePage() {
                     Prêt pour une pause gourmande ?
                   </div>
 
-                  <h2 className="heading-lg mb-4 text-cream">
+                  <h2 className="heading-lg mb-3 md:mb-4 text-cream text-xl md:text-2xl lg:text-3xl">
                     Une parenthèse douce au cœur du Quartier Latin
                   </h2>
 
-                  <p className="text-base text-cream/80 mb-6 leading-relaxed">
+                  <p className="text-sm md:text-base text-cream/80 mb-4 md:mb-6 leading-relaxed">
                     Venez découvrir nos pâtisseries faites maison, nos boissons artisanales et notre ambiance cosy.
                   </p>
 
@@ -470,16 +470,16 @@ export default function HomePage() {
                   </div>
 
                   {/* Compact Floating Badge */}
-                  <div className="absolute -bottom-4 -right-4 bg-coral text-white px-4 py-2 rounded-xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                    <div className="flex items-center gap-2">
+                  <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-coral text-white px-3 py-1.5 md:px-4 md:py-2 rounded-xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300">
+                    <div className="flex items-center gap-1.5 md:gap-2">
                       <div className="flex -space-x-1">
                         {[...Array(3)].map((_, i) => (
-                          <div key={i} className="w-5 h-5 rounded-full bg-white/20 border border-white"></div>
+                          <div key={i} className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-white/20 border border-white"></div>
                         ))}
                       </div>
                       <div>
-                        <p className="text-[10px] opacity-90">Note</p>
-                        <p className="text-sm font-bold">4.9 ★</p>
+                        <p className="text-[9px] md:text-[10px] opacity-90">Note</p>
+                        <p className="text-xs md:text-sm font-bold">4.9 ★</p>
                       </div>
                     </div>
                   </div>
