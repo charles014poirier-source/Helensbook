@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
@@ -28,7 +28,7 @@ const animationProps = {
 
 type ShinyButtonVariant = "caramel" | "beige" | "sage";
 
-interface ShinyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ShinyButtonProps extends HTMLMotionProps<"button"> {
   children: React.ReactNode;
   className?: string;
   variant?: ShinyButtonVariant;
@@ -48,13 +48,10 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
 }) => {
   const colors = variantColors[variant];
 
-  // ✅ Fix Cloudflare/TS: onDrag HTML conflicts with framer-motion onDrag
-  const { onDrag, ...rest } = props;
-
   return (
     <motion.button
       {...animationProps}
-      {...rest}
+      {...props}
       className={cn(
         "relative rounded-lg px-6 py-2 font-medium backdrop-blur-xl transition-shadow duration-300 ease-in-out hover:shadow-lg",
         colors.bg,
@@ -87,5 +84,4 @@ export const ShinyButton: React.FC<ShinyButtonProps> = ({
   );
 };
 
-// ✅ Fix export: default export should be the component, not an object
 export default ShinyButton;
