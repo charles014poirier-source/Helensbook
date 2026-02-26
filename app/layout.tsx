@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Infant, Outfit, Caveat } from "next/font/google";
 import "./globals.css";
 import siteData from "@/lib/siteData";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const cormorant = Cormorant_Infant({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${cormorant.variable} ${outfit.variable} ${caveat.variable}`}>
       <body className="font-sans bg-cream text-coffee antialiased">
+        <ScrollToTop />
         {children}
       </body>
     </html>

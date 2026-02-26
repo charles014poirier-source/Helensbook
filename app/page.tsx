@@ -62,7 +62,7 @@ export default function HomePage() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
               <Link href="/menu" className="inline-flex items-center justify-center">
-                <ShinyButton variant="caramel" className="px-6 py-2.5 md:px-8 md:py-3 text-sm md:text-base">
+                <ShinyButton variant="caramel" className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 text-sm">
                   Voir la carte
                 </ShinyButton>
               </Link>
@@ -70,9 +70,9 @@ export default function HomePage() {
                 href={siteData.socials.googleMaps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 md:px-8 md:py-3 bg-white text-espresso font-semibold rounded-full hover:bg-cream hover:scale-105 transition-all duration-300 shadow-lg text-sm md:text-base"
+                className="group inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 bg-white text-espresso font-semibold rounded-full hover:bg-cream hover:scale-105 transition-all duration-300 shadow-lg text-sm"
               >
-                <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -97,9 +97,9 @@ export default function HomePage() {
             </div>
 
             {/* Featured Item - Large Card */}
-            <div className="mb-12">
+            <div className="mb-8 md:mb-12">
               <Link href="/menu" className="group block">
-                <div className="relative bg-vanilla rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+                <div className="relative bg-vanilla rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <div className="aspect-[4/3] lg:aspect-square relative overflow-hidden">
                       <Image
@@ -108,27 +108,27 @@ export default function HomePage() {
                         fill
                         className="object-cover group-hover:scale-110 transition-transform duration-700"
                       />
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-flex items-center gap-2 px-4 py-2 bg-coral text-white font-semibold rounded-full shadow-lg">
+                      <div className="absolute top-2 left-2 md:top-4 md:left-4">
+                        <span className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 py-1 md:px-4 md:py-2 bg-coral text-white font-semibold rounded-full shadow-lg text-xs md:text-sm">
                           ★ Best-seller
                         </span>
                       </div>
                     </div>
-                    <div className="p-8 lg:p-12 flex flex-col justify-center">
-                      <div className="flex gap-2 mb-4">
-                        <span className="badge-vegan">🌱 Vegan</span>
+                    <div className="p-4 md:p-6 lg:p-12 flex flex-col justify-center">
+                      <div className="flex gap-2 mb-2 md:mb-4">
+                        <span className="badge-vegan text-xs">🌱 Vegan</span>
                       </div>
-                      <h3 className="heading-xl mb-4 group-hover:text-coral transition-colors">
+                      <h3 className="heading-sm md:heading-lg lg:heading-xl mb-2 md:mb-4 group-hover:text-coral transition-colors">
                         Cinnamon Roll Pistache
                       </h3>
-                      <p className="text-body mb-6">
+                      <p className="text-body text-xs md:text-sm mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
                         Brioche à la cannelle, glaçage pistache maison. Notre signature, un mariage parfait entre l&apos;onctuosité de la brioche et la subtilité de la pistache.
                       </p>
                       <div className="flex items-center justify-between">
-                        <span className="text-2xl font-bold text-coral">5.50€</span>
-                        <span className="inline-flex items-center gap-2 text-caramel font-medium group-hover:translate-x-2 transition-transform">
+                        <span className="text-lg md:text-xl lg:text-2xl font-bold text-coral">5.50€</span>
+                        <span className="inline-flex items-center gap-2 text-caramel font-medium group-hover:translate-x-2 transition-transform text-sm md:text-base">
                           Découvrir
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                           </svg>
                         </span>
@@ -140,7 +140,7 @@ export default function HomePage() {
             </div>
 
             {/* Grid for other items */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-12">
               {siteData.menu.flatMap(cat => cat.items)
                 .filter(item => item.tags?.includes('best-seller') && !item.name.includes('Cinnamon'))
                 .slice(0, 8)
@@ -169,31 +169,31 @@ export default function HomePage() {
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                         {item.tags?.includes('best-seller') && (
-                          <div className="absolute top-3 right-3">
-                            <span className="inline-flex items-center justify-center w-8 h-8 bg-coral text-white rounded-full shadow-md">
+                          <div className="absolute top-2 right-2 md:top-3 md:right-3">
+                            <span className="inline-flex items-center justify-center w-6 h-6 md:w-8 md:h-8 bg-coral text-white rounded-full shadow-md text-[10px] md:text-xs">
                               ★
                             </span>
                           </div>
                         )}
                       </div>
-                      <div className="p-5">
-                        <div className="flex gap-2 mb-3">
+                      <div className="p-2.5 md:p-4 lg:p-5">
+                        <div className="flex gap-1.5 md:gap-2 mb-1.5 md:mb-2 lg:mb-3">
                           {item.tags?.filter(tag => tag !== 'best-seller').map(tag => (
                             <span key={tag} className={
-                              tag === 'vegan' ? 'badge-vegan' :
-                              tag === 'sans-gluten' ? 'badge-sg' :
+                              tag === 'vegan' ? 'badge-vegan text-[10px] px-1.5 py-0.5 md:text-xs md:px-2 md:py-0.5' :
+                              tag === 'sans-gluten' ? 'badge-sg text-[10px] px-1.5 py-0.5 md:text-xs md:px-2 md:py-0.5' :
                               ''
                             }>
                               {tag === 'vegan' ? '🌱' : tag === 'sans-gluten' ? '🌾' : ''}
                             </span>
                           ))}
                         </div>
-                        <h3 className="heading-sm mb-2 group-hover:text-coral transition-colors line-clamp-1">
+                        <h3 className="heading-sm mb-1 md:mb-2 group-hover:text-coral transition-colors line-clamp-1 text-sm md:text-base lg:text-lg">
                           {item.name}
                         </h3>
-                        <p className="text-body text-sm mb-3 line-clamp-2">{item.description}</p>
+                        <p className="text-body text-xs md:text-sm mb-1.5 md:mb-2 lg:mb-3 line-clamp-1 md:line-clamp-2">{item.description}</p>
                         {item.price && (
-                          <p className="text-coral font-semibold">{item.price}</p>
+                          <p className="text-coral font-semibold text-sm md:text-base">{item.price}</p>
                         )}
                       </div>
                     </div>
@@ -205,11 +205,11 @@ export default function HomePage() {
             <div className="text-center">
               <Link
                 href="/menu"
-                className="group relative inline-flex items-center gap-3 px-10 py-4 bg-coral text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-coral/30"
+                className="group relative inline-flex items-center gap-2 md:gap-3 px-6 py-2.5 md:px-10 md:py-4 bg-coral text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-coral/30 text-sm md:text-base"
               >
-                <span className="relative z-10 flex items-center gap-3">
+                <span className="relative z-10 flex items-center gap-2 md:gap-3">
                   Voir tout le menu
-                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
@@ -386,7 +386,7 @@ export default function HomePage() {
                       href={siteData.socials.googleMaps}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-coral text-white font-medium rounded-full hover:bg-caramel transition-all duration-300 hover:scale-105 text-sm"
+                      className="group inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-coral text-white font-medium rounded-full hover:bg-caramel transition-all duration-300 hover:scale-105 text-sm"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -399,7 +399,7 @@ export default function HomePage() {
                     </a>
                     <Link
                       href="/menu"
-                      className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white/10 backdrop-blur-sm text-cream font-medium rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 text-sm"
+                      className="group inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white/10 backdrop-blur-sm text-cream font-medium rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 text-sm"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />

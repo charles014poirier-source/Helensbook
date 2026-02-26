@@ -76,12 +76,12 @@ export default function MenuPage() {
         {/* Category Tabs */}
         <section className="sticky top-16 md:top-20 z-30 bg-cream/95 backdrop-blur-sm border-b border-coffee/10">
           <div className="section-inner">
-            <div className="flex overflow-x-auto gap-2 py-4 scrollbar-hide">
+            <div className="flex overflow-x-auto gap-2 py-3 md:py-4 scrollbar-hide">
               {categories.map((category, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveCategory(index)}
-                  className={`whitespace-nowrap px-6 py-3 rounded-full font-medium transition-all duration-200 ${
+                  className={`whitespace-nowrap px-3 py-1.5 md:px-6 md:py-3 rounded-full font-medium transition-all duration-200 text-sm md:text-base ${
                     activeCategory === index
                       ? 'bg-coffee text-white'
                       : 'bg-vanilla text-coffee hover:bg-coffee/10'
@@ -229,15 +229,15 @@ export default function MenuPage() {
         <section className="section">
           <div className="section-inner text-center">
             <h2 className="heading-lg mb-4">Envie de goûter ?</h2>
-            <p className="text-lead text-coffee/80 mb-8 max-w-xl mx-auto">
+            <p className="text-lead text-coffee/80 mb-6 md:mb-8 max-w-xl mx-auto">
               Venez nous rendre visite pour découvrir toutes nos créations du jour.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <a
                 href={siteData.socials.googleMaps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary"
+                className="btn-primary px-4 py-2 sm:px-6 sm:py-2.5 text-sm"
               >
                 Nous trouver
               </a>
@@ -245,7 +245,7 @@ export default function MenuPage() {
                 href={siteData.socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary"
+                className="btn-secondary px-4 py-2 sm:px-6 sm:py-2.5 text-sm"
               >
                 Voir les nouveautés sur Instagram
               </a>

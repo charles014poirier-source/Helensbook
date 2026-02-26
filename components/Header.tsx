@@ -37,12 +37,12 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-10 h-10 md:w-12 md:h-12 p-1.5 bg-vanilla/50 rounded-full backdrop-blur-sm border-2 border-coffee/20">
+            <div className="relative w-14 h-14 md:w-16 md:h-16 p-1 bg-vanilla/50 rounded-full backdrop-blur-sm border-2 border-coffee/20">
               <Image
-                src="/helens_book_white_bg.png"
+                src="/logo marron.png"
                 alt={siteData.name}
                 fill
-                className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
               />
             </div>
             <span className="font-serif text-xl md:text-2xl font-semibold text-espresso group-hover:text-caramel transition-colors">
