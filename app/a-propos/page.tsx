@@ -39,20 +39,20 @@ export default function AboutPage() {
               {/* Texte biographique */}
               <div className="order-2 lg:order-1">
                 <p className="font-hand text-2xl text-caramel mb-3">Notre histoire</p>
-                <h2 className="heading-lg mb-6">Helen's Book</h2>
+                <h2 className="heading-lg mb-6">Helen&apos;s Book</h2>
                 <div className="space-y-4 text-coffee/80 leading-relaxed">
                   <p className="text-body">
-                    Au cœur du Quartier Latin, Helen's Book est né d'une envie simple : créer un espace
-                    où le temps s'arrête un peu. Une parenthèse douce entre deux pages, entre deux gorgées de café.
+                    Au cœur du Quartier Latin, Helen&apos;s Book est né d&apos;une envie simple : créer un espace
+                    où le temps s&apos;arrête un peu. Une parenthèse douce entre deux pages, entre deux gorgées de café.
                   </p>
                   <p className="text-body">
-                    Ici, tout est fait maison — nos pâtisriers arrivent avant l'aube pour préparer
+                    Ici, tout est fait maison — nos pâtisriers arrivent avant l&apos;aube pour préparer
                     cinnamon rolls, cookies et autres gourmandises. Majoritairement vegan, jamais trop sucré,
                     toujours avec amour.
                   </p>
                   <p className="text-body">
-                    Un coffee shop cosy où l'on travaille, lit, ou papute. Où les plantes filtrent la lumière,
-                    où les livres s'empilent, et où chaque visiteur devient un peu un habitué.
+                    Un coffee shop cosy où l&apos;on travaille, lit, ou papute. Où les plantes filtrent la lumière,
+                    où les livres s&apos;empilent, et où chaque visiteur devient un peu un habitué.
                   </p>
                   <p className="font-hand text-xl text-caramel mt-6">
                     Bienvenue chez vous. ☕
