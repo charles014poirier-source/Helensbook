@@ -234,18 +234,10 @@ export default function MenuPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
               <a
-                href={siteData.socials.googleMaps}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary px-4 py-2 sm:px-6 sm:py-2.5 text-sm"
-              >
-                Nous trouver
-              </a>
-              <a
                 href={siteData.socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary px-4 py-2 sm:px-6 sm:py-2.5 text-sm"
+                className="btn-secondary w-auto"
               >
                 Voir les nouveautés sur Instagram
               </a>

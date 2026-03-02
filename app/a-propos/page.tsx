@@ -32,29 +32,48 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Story */}
+        {/* Story - Biographie */}
         <section className="section">
           <div className="section-inner">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              {/* Texte biographique */}
               <div className="order-2 lg:order-1">
-                <h2 className="heading-lg mb-6">{siteData.story.title}</h2>
-                <div className="prose prose-lg text-coffee/70">
-                  {siteData.story.content.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="text-body mb-4">
-                      {paragraph.trim()}
-                    </p>
-                  ))}
+                <p className="font-hand text-2xl text-caramel mb-3">Notre histoire</p>
+                <h2 className="heading-lg mb-6">Helen's Book</h2>
+                <div className="space-y-4 text-coffee/80 leading-relaxed">
+                  <p className="text-body">
+                    Au cœur du Quartier Latin, Helen's Book est né d'une envie simple : créer un espace
+                    où le temps s'arrête un peu. Une parenthèse douce entre deux pages, entre deux gorgées de café.
+                  </p>
+                  <p className="text-body">
+                    Ici, tout est fait maison — nos pâtisriers arrivent avant l'aube pour préparer
+                    cinnamon rolls, cookies et autres gourmandises. Majoritairement vegan, jamais trop sucré,
+                    toujours avec amour.
+                  </p>
+                  <p className="text-body">
+                    Un coffee shop cosy où l'on travaille, lit, ou papute. Où les plantes filtrent la lumière,
+                    où les livres s'empilent, et où chaque visiteur devient un peu un habitué.
+                  </p>
+                  <p className="font-hand text-xl text-caramel mt-6">
+                    Bienvenue chez vous. ☕
+                  </p>
                 </div>
               </div>
 
+              {/* Image */}
               <div className="order-1 lg:order-2">
-                <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
-                  <Image
-                    src="https://images.unsplash.com/photo-1507133750069-69d3cdad1637?w=800&q=80"
-                    alt="Intérieur cosy d'Helen's Book avec livres"
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative">
+                  <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                      src="/en%20savoir%20plus.jpeg"
+                      alt="Intérieur cosy d'Helen's Book avec livres"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  {/* Élément décoratif */}
+                  <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-coral/20 rounded-full blur-2xl"></div>
+                  <div className="absolute -top-4 -left-4 w-32 h-32 bg-sage/20 rounded-full blur-3xl"></div>
                 </div>
               </div>
             </div>
@@ -131,7 +150,7 @@ export default function AboutPage() {
                 href="https://www.instagram.com/helensbook.cafe/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary"
+                className="btn-primary w-auto"
               >
                 Voir plus sur Instagram
               </a>
@@ -232,26 +251,11 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                    <a
-                      href={siteData.socials.googleMaps}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-coral text-white font-medium rounded-full hover:bg-caramel transition-all duration-300 hover:scale-105 text-sm"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      Nous trouver
-                      <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
+                  {/* CTA Button */}
+                  <div className="flex justify-center lg:justify-start">
                     <Link
                       href="/menu"
-                      className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-white/10 backdrop-blur-sm text-cream font-medium rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 text-sm"
+                      className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-coral text-white font-medium rounded-full hover:bg-caramel transition-all duration-300 hover:scale-105 text-sm"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -320,35 +324,12 @@ export default function AboutPage() {
                       </div>
                     </div>
                   </div>
-
-                  {/* Compact Floating Badge */}
-                  <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-coral text-white px-3 py-1.5 md:px-4 md:py-2 rounded-xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <div className="flex -space-x-1">
-                        {[...Array(3)].map((_, i) => (
-                          <div key={i} className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-white/20 border border-white"></div>
-                        ))}
-                      </div>
-                      <div>
-                        <p className="text-[9px] md:text-[10px] opacity-90">Note</p>
-                        <p className="text-xs md:text-sm font-bold">4.9 ★</p>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Back to home */}
-        <section className="pb-16">
-          <div className="section-inner text-center">
-            <Link href="/" className="btn-text">
-              ← Retour à l&apos;accueil
-            </Link>
-          </div>
-        </section>
       </main>
 
       <Footer />

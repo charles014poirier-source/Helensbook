@@ -39,10 +39,10 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-14 h-14 md:w-16 md:h-16 p-1 bg-vanilla/50 rounded-full backdrop-blur-sm border-2 border-coffee/20">
               <Image
-                src="/logo marron.png"
+                src="/helensbook_transparent.png"
                 alt={siteData.name}
                 fill
-                className="object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
               />
             </div>
             <span className="font-serif text-xl md:text-2xl font-semibold text-espresso group-hover:text-caramel transition-colors">

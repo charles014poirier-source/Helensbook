@@ -5,13 +5,57 @@ import Footer from '@/components/Footer';
 import InfoBar from '@/components/InfoBar';
 import SEOHead from '@/components/SEOHead';
 import ReviewsDisplay from '@/components/ReviewsDisplay';
-import { ShinyButton } from '@/components/ui/shiny-button';
 import Carousel from '@/components/ui/Carousel';
 import siteData from '@/lib/siteData';
 
 export default function HomePage() {
   const slogan = siteData.slogans[siteData.selectedSlogan];
   const h1 = siteData.h1Options[siteData.selectedH1];
+
+  // Calculer si le coffee shop est ouvert actuellement
+  const today = new Date().toLocaleDateString('fr-FR', { weekday: 'long' as const });
+  const currentHour = new Date().getHours();
+  const todayHours = siteData.openingHours[today as keyof typeof siteData.openingHours] || '';
+
+  // Vérifier si ouvert (parse l'horaire et compare avec l'heure actuelle)
+  const isOpen = todayHours !== 'Fermé' && (() => {
+    const [start, end] = todayHours.split(' - ').map(h => {
+      const [hours, minutes] = h.trim().split('h').map(Number);
+      return hours + (minutes || 0) / 60;
+    });
+    return currentHour >= start && currentHour < end;
+  })();
+
+  // Générer le message d'ouverture/fermeture avec l'heure
+  const getOpeningMessage = () => {
+    if (isOpen) {
+      return 'Ouvert actuellement';
+    }
+
+    // Si c'est fermé toute la journée, trouver le prochain jour d'ouverture
+    if (todayHours === 'Fermé') {
+      const days = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+      const todayIndex = days.indexOf(today);
+
+      // Chercher le prochain jour ouvert
+      for (let i = 1; i <= 7; i++) {
+        const nextDayIndex = (todayIndex + i) % 7;
+        const nextDay = days[nextDayIndex];
+        const nextDayHours = siteData.openingHours[nextDay as keyof typeof siteData.openingHours];
+
+        if (nextDayHours !== 'Fermé') {
+          const [openTime] = nextDayHours.split(' - ');
+          return `Fermé, ouvre ${nextDay} à ${openTime}`;
+        }
+      }
+    }
+
+    // Si c'est fermé mais ouvre plus tard aujourd'hui
+    const [openTime] = todayHours.split(' - ');
+    return `Fermé actuellement, ouvre à ${openTime}`;
+  };
+
+  const openingMessage = getOpeningMessage();
 
   return (
     <>
@@ -21,7 +65,7 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative h-[70vh] md:h-[85vh] min-h-[500px] md:min-h-[600px] flex items-center justify-center">
+        <section className="relative h-[75vh] md:h-[90vh] min-h-[550px] md:min-h-[650px] flex items-center justify-center">
           {/* Carousel Background */}
           <Carousel
             interval={2000}
@@ -37,47 +81,57 @@ export default function HomePage() {
             ]}
           />
 
-          {/* Content */}
-          <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
-            <h1 className="heading-xl mb-4 md:mb-6 animate-fade-in text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+          {/* Gradient Overlay - subtil et moderne */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
+
+          {/* Content - Centré */}
+          <div className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 max-w-5xl mx-auto text-center">
+            {/* Badge dynamique d'ouverture */}
+            <div className="animate-fade-in mb-6 mt-8 md:mt-0 flex justify-center">
+              <span className={`inline-flex items-center gap-2 px-4 py-2 backdrop-blur-sm rounded-full text-sm font-medium shadow-lg ${
+                isOpen
+                  ? 'bg-sage/90 text-white'
+                  : 'bg-coffee/70 text-white/70'
+              }`}>
+                <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-white animate-pulse' : 'bg-white/50'}`}></span>
+                {openingMessage}
+              </span>
+            </div>
+
+            {/* Titre avec style moderne */}
+            <h1 className="heading-xl mb-6 animate-slide-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ animationDelay: '0.1s' }}>
               {h1}
             </h1>
-            <p className="text-lead text-espresso mb-6 md:mb-8 animate-slide-up text-base sm:text-lg" style={{ animationDelay: '0.2s' }}>
+
+            {/* Séparateur décoratif */}
+            <div className="animate-slide-up w-24 h-1.5 bg-gradient-to-r from-coral to-caramel rounded-full mb-8 shadow-lg mx-auto" style={{ animationDelay: '0.2s' }}></div>
+
+            {/* Slogan */}
+            <p className="animate-slide-up text-xl md:text-2xl text-white/90 font-light mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ animationDelay: '0.3s' }}>
               {slogan}
             </p>
 
-            {/* Highlights */}
-            <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-10 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+            {/* Highlights - Style moderne avec fond blanc semi-transparent */}
+            <div className="animate-slide-up flex flex-wrap justify-center gap-3 mb-10" style={{ animationDelay: '0.4s' }}>
               {siteData.highlights.slice(0, 3).map((highlight, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 bg-espresso/80 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium text-cream shadow-sm"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-2xl text-sm md:text-base font-medium text-espresso shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-default"
                 >
-                  <span>{highlight.icon}</span>
+                  <span className="text-lg">{highlight.icon}</span>
                   {highlight.text}
                 </span>
               ))}
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
-              <Link href="/menu" className="inline-flex items-center justify-center">
-                <ShinyButton variant="caramel" className="px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 text-sm">
-                  Voir la carte
-                </ShinyButton>
-              </Link>
-              <a
-                href={siteData.socials.googleMaps}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3 bg-white text-espresso font-semibold rounded-full hover:bg-cream hover:scale-105 transition-all duration-300 shadow-lg text-sm"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            {/* CTA - Design moderne */}
+            <div className="animate-slide-up flex flex-wrap justify-center gap-4" style={{ animationDelay: '0.5s' }}>
+              <Link href="/menu" className="group inline-flex items-center gap-3 px-8 py-4 bg-coral text-white font-semibold rounded-2xl shadow-xl hover:bg-caramel hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-lg">
+                Voir la carte
+                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                Nous trouver
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -205,15 +259,9 @@ export default function HomePage() {
             <div className="text-center">
               <Link
                 href="/menu"
-                className="group relative inline-flex items-center gap-2 md:gap-3 px-6 py-2.5 md:px-10 md:py-4 bg-coral text-white font-semibold rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-coral/30 text-sm md:text-base"
+                className="btn-primary bg-coral hover:bg-caramel w-auto"
               >
-                <span className="relative z-10 flex items-center gap-2 md:gap-3">
-                  Voir tout le menu
-                  <svg className="w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                Voir tout le menu
               </Link>
             </div>
           </div>
@@ -243,7 +291,7 @@ export default function HomePage() {
                   ))}
                 </div>
 
-                <Link href="/a-propos" className="btn-primary mt-8">
+                <Link href="/a-propos" className="btn-primary mt-8 w-auto">
                   En savoir plus
                 </Link>
               </div>
@@ -251,7 +299,7 @@ export default function HomePage() {
               <div className="order-1 lg:order-2">
                 <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg">
                   <Image
-                    src="https://images.unsplash.com/photo-1507133750069-69d3cdad1637?w=800&q=80"
+                    src="/en%20savoir%20plus.jpeg"
                     alt="Intérieur cosy d'Helen's Book avec livres et café"
                     fill
                     className="object-cover"
@@ -308,6 +356,45 @@ export default function HomePage() {
             <div className="text-center mb-12">
               <p className="font-hand text-2xl text-coral mb-2">Ce qu&apos;ils disent de nous</p>
               <h2 className="heading-md">Avis Google</h2>
+
+              {/* Google Rating Badge - Large */}
+              <div className="flex justify-center mb-8">
+                <a
+                  href={siteData.socials.googleMaps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-4 px-6 py-4 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+                >
+                  {/* Google Logo */}
+                  <svg className="w-8 h-8" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
+
+                  {/* Rating - 5 étoiles pleines */}
+                  <div className="text-left">
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl font-bold text-espresso">4.8</span>
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <svg key={i} className="w-6 h-6" fill="#FBBC05" viewBox="0 0 24 24">
+                            <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                          </svg>
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-sm font-semibold text-coffee mt-1">250+ avis Google</p>
+                  </div>
+
+                  {/* Arrow */}
+                  <svg className="w-5 h-5 text-coral group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+
               <p className="text-body mt-4 max-w-2xl mx-auto">
                 Découvrez les avis de nos clients sur Google. Votre avis nous tient à cœur !
               </p>
@@ -320,7 +407,7 @@ export default function HomePage() {
                 href={siteData.socials.googleMaps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary bg-coral hover:bg-caramel"
+                className="btn-primary bg-coral hover:bg-caramel w-auto"
               >
                 Laisser un avis sur Google
               </a>
@@ -380,30 +467,12 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                    <a
-                      href={siteData.socials.googleMaps}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-coral text-white font-medium rounded-full hover:bg-caramel transition-all duration-300 hover:scale-105 text-sm"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      Nous trouver
-                      <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
+                  {/* CTA Button */}
+                  <div className="flex justify-center lg:justify-start">
                     <Link
                       href="/menu"
-                      className="group inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-white/10 backdrop-blur-sm text-cream font-medium rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 text-sm"
+                      className="btn-primary bg-coral hover:bg-caramel w-auto"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                      </svg>
                       Voir la carte
                     </Link>
                   </div>
@@ -465,21 +534,6 @@ export default function HomePage() {
                       <div className="absolute bottom-2 left-2 right-2">
                         <p className="text-cream font-medium text-xs">Matcha Latte</p>
                         <p className="text-cream text-xs">4.50€</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Compact Floating Badge */}
-                  <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-coral text-white px-3 py-1.5 md:px-4 md:py-2 rounded-xl shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <div className="flex -space-x-1">
-                        {[...Array(3)].map((_, i) => (
-                          <div key={i} className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-white/20 border border-white"></div>
-                        ))}
-                      </div>
-                      <div>
-                        <p className="text-[9px] md:text-[10px] opacity-90">Note</p>
-                        <p className="text-xs md:text-sm font-bold">4.9 ★</p>
                       </div>
                     </div>
                   </div>

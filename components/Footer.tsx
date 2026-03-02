@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import siteData from '@/lib/siteData';
 
 export default function Footer() {
@@ -12,16 +11,6 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
             {/* Brand */}
             <div className="lg:col-span-1">
-              <Link href="/" className="inline-block mb-4">
-                <div className="relative w-16 h-16 rounded-full border-2 border-cream/20 p-2">
-                  <Image
-                    src="/helens_book_white_bg.png"
-                    alt={siteData.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </Link>
               <h3 className="font-serif text-2xl font-semibold text-cream mb-4">
                 {siteData.name}
               </h3>
