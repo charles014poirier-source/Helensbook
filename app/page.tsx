@@ -9,6 +9,7 @@ import InfoBar from '@/components/InfoBar';
 import SEOHead from '@/components/SEOHead';
 import ReviewsDisplay from '@/components/ReviewsDisplay';
 import Carousel from '@/components/ui/Carousel';
+import ModernCTA from '@/components/ModernCTA';
 import siteData from '@/lib/siteData';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -363,9 +364,14 @@ export default function HomePage() {
                   ))}
                 </div>
 
-                <Link href="/a-propos" className="btn-primary mt-8 w-auto">
-                  En savoir plus
-                </Link>
+                <div className="text-center lg:text-left">
+                  <ModernCTA
+                    href="/a-propos"
+                    text="En savoir plus"
+                    icon="arrow"
+                    variant="gradient"
+                  />
+                </div>
               </div>
 
               <div className="order-1 lg:order-2">
