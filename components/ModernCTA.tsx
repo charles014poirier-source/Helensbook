@@ -36,7 +36,16 @@ const icons = {
 const isExternalUrl = (url: string) => {
   try {
     const urlObj = new URL(url);
-    return urlObj.origin !== window.location.origin;
+    // Check if it's an absolute URL (starts with http:// or https://)
+    if (urlObj.protocol === 'http:' || urlObj.protocol === 'https:') {
+      // For client-side, check if it's a different origin
+      if (typeof window !== 'undefined') {
+        return urlObj.origin !== window.location.origin;
+      }
+      // For server-side, assume absolute URLs are external
+      return true;
+    }
+    return false;
   } catch {
     return false;
   }
