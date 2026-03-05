@@ -483,15 +483,13 @@ export default function HomePage() {
 
             {/* CTA */}
             <div className="text-center mt-12">
-              <Link
+              <ModernCTA
                 href="/a-propos#suivez-nous"
-                className="btn-secondary inline-flex items-center gap-2 group"
-              >
-                <span>Helen&apos;s book en images</span>
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
+                text="Helen's book en images"
+                icon="arrow"
+                variant="outline"
+                className="w-auto"
+              />
             </div>
           </div>
         </section>
