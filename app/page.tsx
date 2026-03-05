@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header';
@@ -7,9 +10,29 @@ import SEOHead from '@/components/SEOHead';
 import ReviewsDisplay from '@/components/ReviewsDisplay';
 import Carousel from '@/components/ui/Carousel';
 import siteData from '@/lib/siteData';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function HomePage() {
+  const [showFloatingBadge, setShowFloatingBadge] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [mosaicRef, isScrollVisible] = useScrollAnimation();
   const slogan = siteData.slogans[siteData.selectedSlogan];
+
+  // Gérer l'affichage du badge flottant et la transition au scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      // Calculer le progrès du scroll (0 à 1 sur la première section)
+      const progress = Math.min(scrollY / windowHeight, 1);
+
+      // Afficher le badge flottant après avoir scrollé past 200px
+      setShowFloatingBadge(scrollY > 200);
+      setScrollProgress(progress);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   const h1 = siteData.h1Options[siteData.selectedH1];
 
   // Calculer si le coffee shop est ouvert actuellement
@@ -65,79 +88,128 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative h-[75vh] md:h-[90vh] min-h-[550px] md:min-h-[650px] flex items-center justify-center">
-          {/* Carousel Background */}
-          <Carousel
-            interval={2000}
-            images={[
-              {
-                src: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1920&q=80',
-                alt: 'Coffee shop ambiance intérieure cosy'
-              },
-              {
-                src: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1920&q=80',
-                alt: 'Intérieur cosy d\'Helen\'s Book avec livres et café'
-              }
-            ]}
-          />
+        <section className="relative h-screen flex items-center justify-center overflow-hidden">
+          {/* Carousel Background avec parallaxe */}
+          <div
+            className="absolute inset-0 transition-transform duration-75 ease-out will-change-transform"
+            style={{ transform: `translateY(${scrollProgress * 30}%) scale(${1 + scrollProgress * 0.1})` }}
+          >
+            <Carousel
+              interval={2000}
+              images={[
+                {
+                  src: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1920&q=80',
+                  alt: 'Coffee shop ambiance intérieure cosy'
+                },
+                {
+                  src: 'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1920&q=80',
+                  alt: 'Intérieur cosy d\'Helen\'s Book avec livres et café'
+                }
+              ]}
+            />
+          </div>
 
-          {/* Gradient Overlay - subtil et moderne */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
+          {/* Gradient Overlay qui s'assombrit au scroll */}
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/75 transition-opacity duration-75"
+            style={{ opacity: 0.75 + scrollProgress * 0.25 }}
+          ></div>
 
-          {/* Content - Centré */}
-          <div className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 max-w-5xl mx-auto text-center">
+          {/* Content - Centré avec transition au scroll */}
+          <div
+            className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 max-w-5xl mx-auto text-center transition-all duration-75 ease-out will-change-transform"
+            style={{
+              opacity: 1 - scrollProgress * 0.7,
+              transform: `translateY(${scrollProgress * 50}px) scale(${1 - scrollProgress * 0.1})`
+            }}
+          >
             {/* Badge dynamique d'ouverture */}
-            <div className="animate-fade-in mb-6 mt-8 md:mt-0 flex justify-center">
-              <span className={`inline-flex items-center gap-2 px-4 py-2 backdrop-blur-sm rounded-full text-sm font-medium shadow-lg ${
+            <div className="mb-3 md:mb-6 mt-4 md:mt-0 flex justify-center" style={{ animation: 'badge-entrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both' }}>
+              <span className={`inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium shadow-lg ${
                 isOpen
-                  ? 'bg-sage/90 text-white'
+                  ? 'bg-sage/90 text-white animate-badge-glow-open'
                   : 'bg-coffee/70 text-white/70'
               }`}>
-                <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-white animate-pulse' : 'bg-white/50'}`}></span>
+                <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-white animate-status-pulse' : 'bg-white/50'}`}></span>
                 {openingMessage}
               </span>
             </div>
 
             {/* Titre avec style moderne */}
-            <h1 className="heading-xl mb-6 animate-slide-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ animationDelay: '0.1s' }}>
+            <h1 className="heading-xl mb-3 md:mb-6 animate-slide-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ animationDelay: '0.1s' }}>
               {h1}
             </h1>
 
-            {/* Séparateur décoratif */}
-            <div className="animate-slide-up w-24 h-1.5 bg-gradient-to-r from-coral to-caramel rounded-full mb-8 shadow-lg mx-auto" style={{ animationDelay: '0.2s' }}></div>
-
             {/* Slogan */}
-            <p className="animate-slide-up text-xl md:text-2xl text-white/90 font-light mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ animationDelay: '0.3s' }}>
+            <p className="animate-slide-up text-lg md:text-2xl lg:text-3xl text-white/90 font-light mb-10 md:mb-16 max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ animationDelay: '0.2s' }}>
               {slogan}
             </p>
 
-            {/* Highlights - Style moderne avec fond blanc semi-transparent */}
-            <div className="animate-slide-up flex flex-wrap justify-center gap-3 mb-10" style={{ animationDelay: '0.4s' }}>
+            {/* Highlights - Design épuré et élégant */}
+            <div className="animate-slide-up flex flex-wrap justify-center gap-2.5 md:gap-3 mb-6 md:mb-10" style={{ animationDelay: '0.3s' }}>
               {siteData.highlights.slice(0, 3).map((highlight, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/95 backdrop-blur-sm rounded-2xl text-sm md:text-base font-medium text-espresso shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-default"
+                  className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3 py-1.5 md:py-1.5 bg-white/15 backdrop-blur-md rounded-full text-xs md:text-sm font-medium text-white/95 border border-white/20 shadow-sm cursor-default"
                 >
-                  <span className="text-lg">{highlight.icon}</span>
+                  <span className="text-sm md:text-base">{highlight.icon}</span>
                   {highlight.text}
                 </span>
               ))}
             </div>
 
-            {/* CTA - Design moderne */}
-            <div className="animate-slide-up flex flex-wrap justify-center gap-4" style={{ animationDelay: '0.5s' }}>
-              <Link href="/menu" className="group inline-flex items-center gap-3 px-8 py-4 bg-coral text-white font-semibold rounded-2xl shadow-xl hover:bg-caramel hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 text-lg">
-                Voir la carte
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {/* CTA - Design moderne et accrocheur */}
+            <div className="animate-slide-up flex flex-wrap justify-center gap-3 md:gap-4" style={{ animationDelay: '0.4s' }}>
+              <Link href="/menu" className="group relative inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 font-semibold rounded-full text-base md:text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+                {/* Background avec dégradé animé */}
+                <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
+                {/* Effet de brillance */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
+                {/* Contenu */}
+                <span className="relative text-white drop-shadow-lg">Voir la carte</span>
+                <svg className="relative w-4 h-4 md:w-5 md:h-5 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
             </div>
           </div>
+
+          {/* Scroll Indicator - Flèche animée */}
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-300 z-10"
+            style={{ opacity: 1 - scrollProgress * 2 }}
+          >
+            <div className="flex flex-col items-center gap-3 text-white/80">
+              <span className="text-xs font-light tracking-widest uppercase">Découvrir</span>
+              <div className="relative w-8 h-12 flex justify-center">
+                <svg
+                  className="w-8 h-8 animate-bounce text-white/60"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Incontournables - Redesigned Section */}
-        <section className="section bg-gradient-to-b from-cream to-vanilla">
+        <section
+          className="section bg-gradient-to-b from-cream to-vanilla transition-all duration-75 ease-out will-change-transform"
+          style={{
+            transform: `translateY(${Math.max(0, (1 - scrollProgress) * 50)}px)`,
+            opacity: Math.min(1, scrollProgress * 2)
+          }}
+        >
           <div className="section-inner">
             {/* Section Header */}
             <div className="text-center mb-16">
@@ -310,42 +382,110 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Gallery */}
-        <section className="section">
+        {/* En images - Mosaïque */}
+        <section className="section bg-vanilla">
           <div className="section-inner">
+            {/* Header */}
             <div className="text-center mb-12">
-              <p className="font-hand text-2xl text-coral mb-2">En images</p>
-              <h2 className="heading-md">La galerie</h2>
+              <p className="font-hand text-2xl text-caramel mb-2">En images</p>
+              <h2 className="heading-md mb-4">Helen&apos;s book en images</h2>
+              <p className="text-body max-w-2xl mx-auto">
+                Découvrez notre univers en images, entre pâtisseries gourmandes et ambiance cosy.
+              </p>
             </div>
 
-            <div className="columns-1 sm:columns-2 lg:columns-4 gap-4 space-y-4">
-              {siteData.gallery.map((image, index) => (
-                <div key={index} className="break-inside-avoid">
-                  <div className="relative overflow-hidden rounded-xl group">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      width={image.width || 600}
-                      height={image.height || 400}
-                      className="w-full h-auto group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                </div>
-              ))}
+            {/* Mosaïque avec animation */}
+            <div ref={mosaicRef} className="relative">
+              {/* Mobile - Grid 2 colonnes */}
+              <div className="grid grid-cols-2 gap-2 md:hidden">
+                {siteData.gallery.slice(0, 6).map((image, index) => {
+                  // Pattern pour mosaïque mobile: 0=2x2, 1=1x1, 2=1x1, 3=2x1, 4=1x1, 5=1x1
+                  const isLarge = index === 0;
+                  const isWide = index === 3;
+
+                  return (
+                    <div
+                      key={index}
+                      className={`
+                        ${isLarge ? 'col-span-2 row-span-2' : ''}
+                        ${isWide ? 'col-span-2' : ''}
+                      `}
+                    >
+                      <div
+                        className={`
+                          relative overflow-hidden rounded-xl group
+                          ${isScrollVisible ? 'is-visible' : 'animate-on-scroll'}
+                        `}
+                      >
+                        <div className={`relative ${isLarge ? 'aspect-square' : isWide ? 'aspect-[2/1]' : 'aspect-square'}`}>
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            width={image.width || 600}
+                            height={image.height || 400}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Desktop - Grid 3-4 colonnes avec mosaïque asymétrique */}
+              <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+                {siteData.gallery.slice(0, 6).map((image, index) => {
+                  // Pattern pour mosaïque desktop:
+                  // index 0: 2x2 (grande)
+                  // index 1: 1x1
+                  // index 2: 1x1
+                  // index 3: 2x1 (large)
+                  // index 4: 1x1
+                  // index 5: 1x1
+                  const isLarge = index === 0;
+                  const isWide = index === 3;
+
+                  return (
+                    <div
+                      key={index}
+                      className={`
+                        ${isLarge ? 'md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2' : ''}
+                        ${isWide ? 'md:col-span-2 lg:col-span-2' : ''}
+                      `}
+                    >
+                      <div
+                        className={`
+                          relative overflow-hidden rounded-xl group
+                          ${isScrollVisible ? 'is-visible' : 'animate-on-scroll'}
+                        `}
+                      >
+                        <div className={`relative ${isLarge ? 'aspect-square' : isWide ? 'aspect-[2/1]' : 'aspect-square'}`}>
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            width={image.width || 600}
+                            height={image.height || 400}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
-            <div className="text-center mt-10">
-              <a
-                href={siteData.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-text"
+            {/* CTA */}
+            <div className="text-center mt-12">
+              <Link
+                href="/a-propos#suivez-nous"
+                className="btn-secondary inline-flex items-center gap-2 group"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                <span>Helen&apos;s book en images</span>
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                Suivez-nous sur Instagram
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -424,7 +564,7 @@ export default function HomePage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/5 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="section-inner relative z-10 py-8 md:py-12">
+          <div className="section-inner relative z-10 px-4 md:px-6 py-8 md:py-12">
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
                 {/* Left Content */}
@@ -437,7 +577,7 @@ export default function HomePage() {
                   </div>
 
                   <h2 className="heading-lg mb-3 md:mb-4 text-cream text-xl md:text-2xl lg:text-3xl">
-                    Une parenthèse douce au cœur du Quartier Latin
+                    Une parenthèse douce au cœur<br />du Quartier Latin
                   </h2>
 
                   <p className="text-sm md:text-base text-cream/80 mb-4 md:mb-6 leading-relaxed">
@@ -471,9 +611,19 @@ export default function HomePage() {
                   <div className="flex justify-center lg:justify-start">
                     <Link
                       href="/menu"
-                      className="btn-primary bg-coral hover:bg-caramel w-auto"
+                      className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-full text-base overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1"
                     >
-                      Voir la carte
+                      {/* Background avec dégradé animé */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
+                      {/* Effet de brillance */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
+                      {/* Contenu */}
+                      <span className="relative text-white drop-shadow-lg">Voir la carte</span>
+                      <svg className="relative w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
                     </Link>
                   </div>
                 </div>
@@ -546,6 +696,26 @@ export default function HomePage() {
 
       <Footer />
       <InfoBar />
+
+      {/* Badge flottant d'ouverture - apparaît au scroll */}
+      <div className={`fixed bottom-20 right-4 z-50 ${
+        showFloatingBadge
+          ? 'animate-badge-entrance'
+          : 'opacity-0 pointer-events-none'
+      }`}>
+        <div className={`backdrop-blur-xl rounded-full border-2 border-white/30 ${
+          isOpen
+            ? 'bg-sage/90 animate-badge-glow-open'
+            : 'bg-coffee/90 animate-badge-glow-closed'
+        }`}>
+          <div className="flex items-center justify-center gap-1.5 px-3 py-1.5">
+            <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-white animate-status-pulse' : 'bg-white/50'}`}></span>
+            <span className={`text-[10px] md:text-xs font-semibold whitespace-nowrap ${isOpen ? 'text-white' : 'text-white/90'}`}>
+              {openingMessage}
+            </span>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
