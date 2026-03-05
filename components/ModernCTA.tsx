@@ -33,6 +33,15 @@ const icons = {
   ),
 };
 
+const isExternalUrl = (url: string) => {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.origin !== window.location.origin;
+  } catch {
+    return false;
+  }
+};
+
 export default function ModernCTA({
   href,
   text,
@@ -51,8 +60,29 @@ export default function ModernCTA({
 
   const glowClasses = variant === 'gradient' ? 'absolute -inset-1 bg-gradient-to-r from-coral to-caramel rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300 -z-10' : '';
 
+  const isExternal = isExternalUrl(href);
+
+  const linkClasses = `${baseClasses} ${variant === 'gradient' ? gradientClasses : outlineClasses} ${className}`;
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        className={linkClasses}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {variant === 'gradient' && <div className={glowClasses}></div>}
+        <span className="relative">{text}</span>
+        <span className="relative group-hover:translate-x-1 transition-transform duration-300">
+          {iconToRender}
+        </span>
+      </a>
+    );
+  }
+
   return (
-    <Link href={href} className={`${baseClasses} ${variant === 'gradient' ? gradientClasses : outlineClasses} ${className}`}>
+    <Link href={href} className={linkClasses}>
       {variant === 'gradient' && <div className={glowClasses}></div>}
       <span className="relative">{text}</span>
       <span className="relative group-hover:translate-x-1 transition-transform duration-300">
