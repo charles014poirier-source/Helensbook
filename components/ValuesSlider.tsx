@@ -38,13 +38,18 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
     const container = containerRef.current;
     if (!container) return;
 
-    const firstChild = container.firstElementChild as HTMLElement | null;
-    if (!firstChild) return;
+    // Get the specific card at the current index
+    const cards = container.children;
+    if (!cards || cards.length === 0) return;
 
-    const scrollPosition = currentIndex * firstChild.offsetWidth;
-    container.scrollTo({
-      left: scrollPosition,
+    const currentCard = cards[currentIndex] as HTMLElement;
+    if (!currentCard) return;
+
+    // Scroll to the current card
+    currentCard.scrollIntoView({
       behavior: 'smooth',
+      block: 'nearest',
+      inline: 'start'
     });
   }, [currentIndex]);
 
