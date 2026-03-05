@@ -152,7 +152,142 @@
   @apply bg-coffee/20 rounded-full hover:bg-coffee/30;
 }
 
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Selection */
 ::selection {
   @apply bg-coral/30 text-coffee;
+}
+
+/* Custom animations for CTA button */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.group-hover\:animate-shine:hover {
+  animation: shine 0.75s ease-in-out;
+}
+
+/* Badge flottant - Animations sobres et élégantes */
+@keyframes badge-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  60% {
+    transform: translateY(-2px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes badge-glow-open {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(134, 163, 151, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 28px rgba(134, 163, 151, 0.5);
+  }
+}
+
+@keyframes badge-glow-closed {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(74, 59, 50, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 24px rgba(74, 59, 50, 0.3);
+  }
+}
+
+@keyframes status-indicator-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+.animate-badge-entrance {
+  animation: badge-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-badge-glow-open {
+  animation: badge-glow-open 3s ease-in-out infinite;
+}
+
+.animate-badge-glow-closed {
+  animation: badge-glow-closed 4s ease-in-out infinite;
+}
+
+.animate-status-pulse {
+  animation: status-indicator-pulse 2.5s ease-in-out infinite;
+}
+
+/* Slide down animation for mobile menu */
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out forwards;
+}
+
+/* Slide up animation for hero content */
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out forwards;
+}
+
+/* Fade in animation */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
 }
