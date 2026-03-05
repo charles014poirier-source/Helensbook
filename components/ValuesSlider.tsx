@@ -10,14 +10,10 @@ interface Value {
 }
 
 interface ValuesSliderProps {
-  values: Value[];
+  values: Readonly<Value[]> | readonly Value[];
 }
 
 export default function ValuesSlider({ values }: ValuesSliderProps) {
-  if (!values?.length) {
-    return <div className="text-center py-12">Aucune valeur à afficher</div>;
-  }
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -25,7 +21,7 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
 
   // Auto-scroll every 5 seconds
   useEffect(() => {
-    if (isPaused || !isScrollVisible) return;
+    if (!values || values.length === 0 || isPaused || !isScrollVisible) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
@@ -41,16 +37,20 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    
+
     const firstChild = container.firstElementChild as HTMLElement | null;
     if (!firstChild) return;
-    
+
     const scrollPosition = currentIndex * firstChild.offsetWidth;
     container.scrollTo({
       left: scrollPosition,
       behavior: 'smooth',
     });
   }, [currentIndex]);
+
+  if (!values || values.length === 0) {
+    return null;
+  }
 
   const scroll = (direction: 'left' | 'right') => {
     const newIndex = direction === 'left'

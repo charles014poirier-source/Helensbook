@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 import InfoBar from '@/components/InfoBar';
 import SEOHead from '@/components/SEOHead';
 import siteData from '@/lib/siteData';
+import ValuesSlider from '@/components/ValuesSlider';
 
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -88,15 +89,7 @@ export default function AboutPage() {
               <h2 className="heading-lg">Nos valeurs</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {siteData.values.map((value, index) => (
-                <div key={index} className="card p-8 text-center">
-                  <span className="text-4xl mb-4 block">{value.icon}</span>
-                  <h3 className="heading-sm mb-3">{value.title}</h3>
-                  <p className="text-body text-sm">{value.description}</p>
-                </div>
-              ))}
-            </div>
+            <ValuesSlider values={siteData.values} />
           </div>
         </section>
 
