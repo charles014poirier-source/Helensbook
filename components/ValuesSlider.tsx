@@ -14,6 +14,10 @@ interface ValuesSliderProps {
 }
 
 export default function ValuesSlider({ values }: ValuesSliderProps) {
+  if (!values?.length) {
+    return <div className="text-center py-12">Aucune valeur à afficher</div>;
+  }
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -31,20 +35,21 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isPaused, isScrollVisible, values.length]);
+  }, [isPaused, isScrollVisible, values]);
 
   // Scroll to current index
   useEffect(() => {
-    if (containerRef.current) {
-      const cardWidth = containerRef.current.firstChild as HTMLElement;
-      if (cardWidth) {
-        const scrollPosition = currentIndex * cardWidth.offsetWidth;
-        containerRef.current.scrollTo({
-          left: scrollPosition,
-          behavior: 'smooth',
-        });
-      }
-    }
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const firstChild = container.firstElementChild as HTMLElement | null;
+    if (!firstChild) return;
+    
+    const scrollPosition = currentIndex * firstChild.offsetWidth;
+    container.scrollTo({
+      left: scrollPosition,
+      behavior: 'smooth',
+    });
   }, [currentIndex]);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -58,12 +63,19 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
     setCurrentIndex(index);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') scroll('left');
+    if (e.key === 'ArrowRight') scroll('right');
+  };
+
   return (
     <section ref={sectionRef} className="py-12">
       <div
         className="relative"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
       >
         {/* Navigation arrows */}
         <div className="flex justify-between items-center mb-6 px-4">
