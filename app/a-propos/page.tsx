@@ -101,7 +101,7 @@ export default function AboutPage() {
         </section>
 
         {/* Instagram Feed */}
-        <section className="section">
+        <section id="suivez-nous" className="section">
           <div className="section-inner">
             <div className="text-center mb-12">
               <p className="font-hand text-2xl text-caramel mb-2">Suivez-nous</p>
@@ -208,7 +208,7 @@ export default function AboutPage() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/5 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="section-inner relative z-10 py-8 md:py-12">
+          <div className="section-inner relative z-10 px-4 md:px-6 py-8 md:py-12">
             <div className="max-w-4xl mx-auto">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
                 {/* Left Content */}
@@ -255,12 +255,19 @@ export default function AboutPage() {
                   <div className="flex justify-center lg:justify-start">
                     <Link
                       href="/menu"
-                      className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-coral text-white font-medium rounded-full hover:bg-caramel transition-all duration-300 hover:scale-105 text-sm"
+                      className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-full text-base overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1"
                     >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      {/* Background avec dégradé animé */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
+                      {/* Effet de brillance */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
+                      {/* Contenu */}
+                      <span className="relative text-white drop-shadow-lg">Voir la carte</span>
+                      <svg className="relative w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
-                      Voir la carte
                     </Link>
                   </div>
                 </div>
