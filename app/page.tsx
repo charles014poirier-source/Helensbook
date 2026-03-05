@@ -547,14 +547,13 @@ export default function HomePage() {
             <ReviewsDisplay />
 
             <div className="text-center mt-8">
-              <a
+              <ModernCTA
                 href={siteData.socials.googleMaps}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary bg-coral hover:bg-caramel w-auto"
-              >
-                Laisser un avis sur Google
-              </a>
+                text="Laisser un avis sur Google"
+                icon="star"
+                variant="gradient"
+                className="w-auto"
+              />
             </div>
           </div>
         </section>
