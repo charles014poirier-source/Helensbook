@@ -88,7 +88,7 @@ export const siteData = {
   highlights: [
     { icon: "🌱", text: "Vegan friendly" },
     { icon: "🌾", text: "Options sans gluten" },
-    { icon: "👩‍🍳", text: "Fait maison" },
+    { icon: "🥧", text: "Fait maison" },
     { icon: "☕", text: "Café & matcha" },
     { icon: "📚", text: "Ambiance book café" },
     { icon: "📍", text: "Paris 5e" },

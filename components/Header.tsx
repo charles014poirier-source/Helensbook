@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import siteData from '@/lib/siteData';
@@ -34,51 +33,11 @@ export default function Header() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-14 h-14 md:w-16 md:h-16 p-1 bg-vanilla/50 rounded-full backdrop-blur-sm border-2 border-coffee/20">
-              <Image
-                src="/helensbook_transparent.png"
-                alt={siteData.name}
-                fill
-                className="object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-              />
-            </div>
-            <span className="font-serif text-xl md:text-2xl font-semibold text-espresso group-hover:text-caramel transition-colors">
-              {siteData.name}
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-coffee hover:text-caramel transition-colors font-medium"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* CTA Button (Desktop) */}
-          <div className="hidden md:block">
-            <a
-              href={siteData.socials.googleMaps}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <InteractiveHoverButton text="Nous trouver" className="border-caramel text-coffee hover:text-white pl-6" />
-            </a>
-          </div>
-
+        <div className="flex items-center justify-center h-16 md:h-20 relative">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-coffee hover:text-caramel transition-colors"
+            className="md:hidden absolute left-0 p-2 text-coffee hover:text-caramel transition-colors"
             aria-label="Menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -105,18 +64,47 @@ export default function Header() {
               )}
             </svg>
           </button>
+
+          {/* Desktop Navigation - Centrée */}
+          <ul className="hidden md:flex items-center gap-10 lg:gap-12">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="relative group text-coffee font-medium text-base lg:text-lg"
+                >
+                  <span className="relative z-10 block py-2 transition-all duration-300 group-hover:text-caramel group-hover:-translate-y-0.5">
+                    {item.label}
+                  </span>
+                  {/* Underline animation */}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-caramel transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA Button (Desktop) - Positionné à droite */}
+          <div className="hidden md:block absolute right-0">
+            <a
+              href={siteData.socials.googleMaps}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InteractiveHoverButton text="Nous trouver" className="border-caramel text-coffee hover:text-white pl-6" />
+            </a>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-coffee/10 animate-slide-down">
-            <ul className="flex flex-col gap-4">
+            <ul className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-coffee hover:text-caramel transition-colors font-medium py-2"
+                    className="block text-coffee hover:text-caramel transition-all duration-200 font-medium py-3 px-4 rounded-lg hover:bg-coffee/5 hover:translate-x-1"
                   >
                     {item.label}
                   </Link>

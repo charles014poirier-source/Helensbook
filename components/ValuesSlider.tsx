@@ -15,13 +15,12 @@ interface ValuesSliderProps {
 
 export default function ValuesSlider({ values }: ValuesSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [sectionRef, isScrollVisible] = useScrollAnimation();
 
   // Auto-scroll every 5 seconds
   useEffect(() => {
-    if (!values || values.length === 0 || isPaused || !isScrollVisible) return;
+    if (!values || values.length === 0 || !isScrollVisible) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
@@ -31,7 +30,7 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isPaused, isScrollVisible, values]);
+  }, [isScrollVisible, values]);
 
   // Scroll to current index
   useEffect(() => {
@@ -57,58 +56,9 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
     return null;
   }
 
-  const scroll = (direction: 'left' | 'right') => {
-    const newIndex = direction === 'left'
-      ? Math.max(0, currentIndex - 1)
-      : Math.min(values.length - 1, currentIndex + 1);
-    setCurrentIndex(newIndex);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowLeft') scroll('left');
-    if (e.key === 'ArrowRight') scroll('right');
-  };
-
   return (
     <section ref={sectionRef} className="py-12">
-      <div
-        className="relative"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onKeyDown={handleKeyDown}
-        tabIndex={0}
-      >
-        {/* Navigation arrows */}
-        <div className="flex justify-between items-center mb-6 px-4">
-          <button
-            onClick={() => scroll('left')}
-            disabled={currentIndex === 0}
-            className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow disabled:opacity-30 disabled:cursor-not-allowed"
-            aria-label="Valeur précédente"
-          >
-            <svg className="w-6 h-6 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <h2 className="heading-md text-center px-4">Ce qui nous anime</h2>
-
-          <button
-            onClick={() => scroll('right')}
-            disabled={currentIndex === values.length - 1}
-            className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow disabled:opacity-30 disabled:cursor-not-allowed"
-            aria-label="Valeur suivante"
-          >
-            <svg className="w-6 h-6 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-
+      <div className="relative">
         {/* Slider container */}
         <div
           ref={containerRef}
@@ -118,7 +68,7 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
           {values.map((value, index) => (
             <div
               key={index}
-              className={`flex-shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-start
+              className={`flex-shrink-0 w-full md:w-[calc(70%-18px)] lg:w-[calc(60%-24px)] snap-start
                 ${isScrollVisible ? 'is-visible' : 'animate-on-scroll'}
               `}
               style={{ transitionDelay: `${index * 100}ms` }}
@@ -131,27 +81,6 @@ export default function ValuesSlider({ values }: ValuesSliderProps) {
             </div>
           ))}
         </div>
-
-        {/* Progress indicators */}
-        <div className="flex justify-center gap-2 mt-6">
-          {values.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentIndex ? 'bg-coral w-8' : 'bg-coral/30 hover:bg-coral/50'
-              }`}
-              aria-label={`Aller à la valeur ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Pause indicator */}
-        {isPaused && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">
-            Pause
-          </div>
-        )}
       </div>
     </section>
   );

@@ -15,6 +15,19 @@ export default function MenuPage() {
   const categories = siteData.menu;
   const currentItems = categories[activeCategory]?.items || [];
 
+  const handleCategoryChange = (index: number) => {
+    setActiveCategory(index);
+    // Scroll vers le début de la section menu
+    const menuSection = document.getElementById('menu-items-section');
+    if (menuSection) {
+      const offsetTop = menuSection.offsetTop - 100; // Ajuste pour compenser la navbar et les filtres
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <>
       <SEOHead path="/menu" />
@@ -75,12 +88,12 @@ export default function MenuPage() {
 
         {/* Category Tabs */}
         <section className="sticky top-16 md:top-20 z-30 bg-cream/95 backdrop-blur-sm border-b border-coffee/10">
-          <div className="section-inner">
+          <div className="section-inner px-4 md:px-6">
             <div className="flex overflow-x-auto gap-2 py-3 md:py-4 scrollbar-hide">
               {categories.map((category, index) => (
                 <button
                   key={index}
-                  onClick={() => setActiveCategory(index)}
+                  onClick={() => handleCategoryChange(index)}
                   className={`whitespace-nowrap px-3 py-1.5 md:px-6 md:py-3 rounded-full font-medium transition-all duration-200 text-sm md:text-base ${
                     activeCategory === index
                       ? 'bg-coffee text-white'
@@ -95,7 +108,7 @@ export default function MenuPage() {
         </section>
 
         {/* Menu Items */}
-        <section className="section">
+        <section id="menu-items-section" className="section">
           <div className="section-inner">
             <div className="max-w-4xl mx-auto">
               <h2 className="heading-md mb-6 md:mb-8 text-center text-xl md:text-2xl">{categories[activeCategory].category}</h2>

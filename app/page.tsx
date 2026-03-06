@@ -716,10 +716,10 @@ export default function HomePage() {
           ? 'animate-badge-entrance'
           : 'opacity-0 pointer-events-none'
       }`}>
-        <div className={`backdrop-blur-xl rounded-full border-2 border-white/30 ${
+        <div className={`backdrop-blur-xl rounded-full border-2 shadow-[0_0_30px_rgba(255,255,255,0.2),inset_0_0_20px_rgba(255,255,255,0.1)] ${
           isOpen
-            ? 'bg-sage/90 animate-badge-glow-open'
-            : 'bg-coffee/90 animate-badge-glow-closed'
+            ? 'bg-sage/65 border-white/40 animate-badge-glow-open'
+            : 'bg-coffee/65 border-white/40 animate-badge-glow-closed'
         }`}>
           <div className="flex items-center justify-center gap-1.5 px-3 py-1.5">
             <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-white animate-status-pulse' : 'bg-white/50'}`}></span>

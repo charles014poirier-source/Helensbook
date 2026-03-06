@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import InfoBar from '@/components/InfoBar';
 import SEOHead from '@/components/SEOHead';
 import siteData from '@/lib/siteData';
-import ValuesSlider from '@/components/ValuesSlider';
+import ValuesGallery from '@/components/ValuesGallery';
 
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -47,7 +47,8 @@ export default function AboutPage() {
                     où le temps s&apos;arrête un peu. Une parenthèse douce entre deux pages, entre deux gorgées de café.
                   </p>
                   <p className="text-body">
-                    Ici, tout est fait maison — nos pâtisriers arrivent avant l&apos;aube pour préparer
+                    Ici, tout est fait maison — nos pâtisr
+                    iers arrivent avant l&apos;aube pour préparer
                     cinnamon rolls, cookies et autres gourmandises. Majoritairement vegan, jamais trop sucré,
                     toujours avec amour.
                   </p>
@@ -84,12 +85,7 @@ export default function AboutPage() {
         {/* Values */}
         <section className="section bg-vanilla">
           <div className="section-inner">
-            <div className="text-center mb-12">
-              <p className="font-hand text-2xl text-caramel mb-2">Ce qui nous anime</p>
-              <h2 className="heading-lg">Nos valeurs</h2>
-            </div>
-
-            <ValuesSlider values={siteData.values} />
+            <ValuesGallery values={siteData.values} />
           </div>
         </section>
 
