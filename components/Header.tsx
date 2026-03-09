@@ -70,7 +70,7 @@ export default function Header() {
             href="/"
             className="md:hidden heading-xl text-coffee hover:text-caramel transition-colors"
           >
-            Helen's Book
+            Helen&apos;s Book
           </Link>
 
           {/* Desktop Navigation - Centrée */}
