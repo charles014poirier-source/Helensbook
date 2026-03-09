@@ -78,7 +78,7 @@ export const siteData = {
 
   // Social media
   socials: {
-    instagram: "https://www.instagram.com/helensbook.paris/",
+    instagram: "https://www.instagram.com/helensbook.cafe/",
     tiktok: "", // À compléter si disponible
     googleMaps: "https://maps.google.com/?q=Helen's+Book+Paris+5e",
     googleReviews: `<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.9952197320767!2d2.3465872764633016!3d48.83922987132945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6710bc0e81047%3A0x6e10c3f14623a9!2sHelen&#39;s%20Book!5e0!3m2!1sfr!2sfr!4v1771375980959!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`, // Lien direct pour laisser un avis Google

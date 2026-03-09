@@ -113,7 +113,7 @@ export default function AboutPage() {
               ].map((src, index) => (
                 <a
                   key={index}
-                  href="https://www.instagram.com/helensbook.cafe/"
+                  href={siteData.socials.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative aspect-square overflow-hidden rounded-xl"
@@ -136,7 +136,7 @@ export default function AboutPage() {
 
             <div className="text-center">
               <a
-                href="https://www.instagram.com/helensbook.cafe/"
+                href={siteData.socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary w-auto"

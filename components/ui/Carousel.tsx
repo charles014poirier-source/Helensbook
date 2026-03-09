@@ -41,22 +41,6 @@ export default function Carousel({ images, interval = 2000 }: CarouselProps) {
         </div>
       ))}
       <div className="absolute inset-0 bg-gradient-to-b from-coffee/30 via-cream/60 to-cream" />
-
-      {/* Carousel indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentIndex
-                ? 'bg-caramel w-8'
-                : 'bg-white/50 hover:bg-white/70'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
-      </div>
     </div>
   );
 }

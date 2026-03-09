@@ -65,6 +65,14 @@ export default function Header() {
             </svg>
           </button>
 
+          {/* Logo - Mobile Only */}
+          <Link
+            href="/"
+            className="md:hidden heading-xl text-coffee hover:text-caramel transition-colors"
+          >
+            Helen's Book
+          </Link>
+
           {/* Desktop Navigation - Centrée */}
           <ul className="hidden md:flex items-center gap-10 lg:gap-12">
             {navItems.map((item) => (

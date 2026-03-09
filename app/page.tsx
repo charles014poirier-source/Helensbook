@@ -9,7 +9,6 @@ import InfoBar from '@/components/InfoBar';
 import SEOHead from '@/components/SEOHead';
 import ReviewsDisplay from '@/components/ReviewsDisplay';
 import Carousel from '@/components/ui/Carousel';
-import ModernCTA from '@/components/ModernCTA';
 import siteData from '@/lib/siteData';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
@@ -17,6 +16,7 @@ export default function HomePage() {
   const [showFloatingBadge, setShowFloatingBadge] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mosaicRef, isScrollVisible] = useScrollAnimation();
+  const [bestSellerRef, isBestSellerVisible] = useScrollAnimation();
   const slogan = siteData.slogans[siteData.selectedSlogan];
 
   // Gérer l'affichage du badge flottant et la transition au scroll
@@ -89,7 +89,7 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative h-screen flex items-center justify-center overflow-hidden py-16 md:py-20 lg:py-24">
           {/* Carousel Background avec parallaxe */}
           <div
             className="absolute inset-0 transition-transform duration-75 ease-out will-change-transform"
@@ -125,35 +125,35 @@ export default function HomePage() {
             }}
           >
             {/* Badge dynamique d'ouverture */}
-            <div className="mb-3 md:mb-6 mt-4 md:mt-0 flex justify-center" style={{ animation: 'badge-entrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both' }}>
-              <span className={`inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 backdrop-blur-sm rounded-full text-xs md:text-sm font-medium shadow-lg ${
+            <div className="mb-6 md:mb-8 lg:mb-10 mt-4 md:mt-6 lg:mt-8 flex justify-center" style={{ animation: 'badge-entrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both' }}>
+              <span className={`inline-flex items-center gap-2 md:gap-2.5 lg:gap-3 px-3 md:px-5 lg:px-6 py-1.5 md:py-2 lg:py-2.5 backdrop-blur-sm rounded-full text-xs md:text-sm lg:text-base font-semibold shadow-lg ${
                 isOpen
                   ? 'bg-sage/90 text-white animate-badge-glow-open'
                   : 'bg-coffee/70 text-white/70'
               }`}>
-                <span className={`w-2 h-2 rounded-full ${isOpen ? 'bg-white animate-status-pulse' : 'bg-white/50'}`}></span>
+                <span className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full ${isOpen ? 'bg-white animate-status-pulse' : 'bg-white/50'}`}></span>
                 {openingMessage}
               </span>
             </div>
 
             {/* Titre avec style moderne */}
-            <h1 className="heading-xl mb-3 md:mb-6 animate-slide-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ animationDelay: '0.1s' }}>
+            <h1 className="heading-xl mb-4 md:mb-6 lg:mb-8 animate-slide-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ animationDelay: '0.1s' }}>
               {h1}
             </h1>
 
             {/* Slogan */}
-            <p className="animate-slide-up text-lg md:text-2xl lg:text-3xl text-white/90 font-light mb-10 md:mb-16 max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ animationDelay: '0.2s' }}>
+            <p className="animate-slide-up text-lg md:text-2xl lg:text-3xl text-white/90 font-light mb-6 md:mb-10 lg:mb-14 max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ animationDelay: '0.2s' }}>
               {slogan}
             </p>
 
             {/* Highlights - Design épuré et élégant */}
-            <div className="animate-slide-up flex flex-wrap justify-center gap-2.5 md:gap-3 mb-6 md:mb-10" style={{ animationDelay: '0.3s' }}>
+            <div className="animate-slide-up flex flex-wrap justify-center gap-2 md:gap-2.5 lg:gap-3 mb-6 md:mb-8 lg:mb-10" style={{ animationDelay: '0.3s' }}>
               {siteData.highlights.slice(0, 3).map((highlight, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 md:px-3 py-1.5 md:py-1.5 bg-white/15 backdrop-blur-md rounded-full text-xs md:text-sm font-medium text-white/95 border border-white/20 shadow-sm cursor-default"
+                  className="inline-flex items-center gap-1 md:gap-1.5 lg:gap-2 px-2.5 md:px-3.5 lg:px-4 py-1 md:py-1.5 lg:py-2 bg-white/15 backdrop-blur-md rounded-full text-xs md:text-xs lg:text-sm font-medium text-white/95 border border-white/20 shadow-sm cursor-default"
                 >
-                  <span className="text-sm md:text-base">{highlight.icon}</span>
+                  <span className="text-xs md:text-sm lg:text-base">{highlight.icon}</span>
                   {highlight.text}
                 </span>
               ))}
@@ -161,7 +161,7 @@ export default function HomePage() {
 
             {/* CTA - Design moderne et accrocheur */}
             <div className="animate-slide-up flex flex-wrap justify-center gap-3 md:gap-4" style={{ animationDelay: '0.4s' }}>
-              <Link href="/menu" className="group relative inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 font-semibold rounded-full text-base md:text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+              <Link href="/menu" className="group relative inline-flex items-center gap-2 md:gap-3 lg:gap-4 px-6 md:px-8 lg:px-10 py-3 md:py-4 lg:py-5 font-bold rounded-full text-base md:text-lg lg:text-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1">
                 {/* Background avec dégradé animé */}
                 <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
                 {/* Effet de brillance */}
@@ -177,28 +177,25 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Scroll Indicator - Flèche animée */}
+          {/* Scroll Indicator - Flèche animée (uniquement desktop) */}
           <div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 transition-opacity duration-300 z-10"
+            className="hidden md:block absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 transition-opacity duration-300 z-10"
             style={{ opacity: 1 - scrollProgress * 2 }}
           >
-            <div className="flex flex-col items-center gap-3 text-white/80">
-              <span className="text-xs font-light tracking-widest uppercase">Découvrir</span>
-              <div className="relative w-8 h-12 flex justify-center">
-                <svg
-                  className="w-8 h-8 animate-bounce text-white/60"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
-                </svg>
-              </div>
+            <div className="relative w-6 h-10 flex justify-center">
+              <svg
+                className="w-6 h-6 animate-bounce text-white/60"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
+              </svg>
             </div>
           </div>
         </section>
@@ -225,52 +222,56 @@ export default function HomePage() {
 
             {/* Featured Item - Large Card */}
             <div className="mb-8 md:mb-12">
-              <Link href="/menu" className="group block">
-                <div className="relative bg-vanilla rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <div className="aspect-[4/3] lg:aspect-square relative overflow-hidden">
-                      <Image
-                        src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80"
-                        alt="Cinnamon Roll Pistache"
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute top-2 left-2 md:top-4 md:left-4">
-                        <span className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 py-1 md:px-4 md:py-2 bg-coral text-white font-semibold rounded-full shadow-lg text-xs md:text-sm">
-                          ★ Best-seller
-                        </span>
+              <div ref={bestSellerRef} className={isBestSellerVisible ? 'is-visible' : 'animate-on-scroll'}>
+                <Link href="/menu" className="group block">
+                  <div className={`relative bg-vanilla rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ${
+                    isBestSellerVisible ? 'animate-bestseller-entrance' : 'opacity-0 translate-y-16'
+                  }`}>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                      <div className="aspect-[4/3] lg:aspect-square relative overflow-hidden">
+                        <Image
+                          src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80"
+                          alt="Cinnamon Roll Pistache"
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div className="absolute top-2 left-2 md:top-4 md:left-4">
+                          <span className="inline-flex items-center gap-1.5 md:gap-2 px-2.5 py-1 md:px-4 md:py-2 bg-coral text-white font-semibold rounded-full shadow-lg text-xs md:text-sm">
+                            ★ Best-seller
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="p-4 md:p-6 lg:p-12 flex flex-col justify-center">
-                      <div className="flex gap-2 mb-2 md:mb-4">
-                        <span className="badge-vegan text-xs">🌱 Vegan</span>
-                      </div>
-                      <h3 className="heading-sm md:heading-lg lg:heading-xl mb-2 md:mb-4 group-hover:text-coral transition-colors">
-                        Cinnamon Roll Pistache
-                      </h3>
-                      <p className="text-body text-xs md:text-sm mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
-                        Brioche à la cannelle, glaçage pistache maison. Notre signature, un mariage parfait entre l&apos;onctuosité de la brioche et la subtilité de la pistache.
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-lg md:text-xl lg:text-2xl font-bold text-coral">5.50€</span>
-                        <span className="inline-flex items-center gap-2 text-caramel font-medium group-hover:translate-x-2 transition-transform text-sm md:text-base">
-                          Découvrir
-                          <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </span>
+                      <div className="p-4 md:p-6 lg:p-12 flex flex-col justify-center">
+                        <div className="flex gap-2 mb-2 md:mb-4">
+                          <span className="badge-vegan text-xs">🌱 Vegan</span>
+                        </div>
+                        <h3 className="heading-sm md:heading-lg lg:heading-xl mb-2 md:mb-4 group-hover:text-coral transition-colors">
+                          Cinnamon Roll Pistache
+                        </h3>
+                        <p className="text-body text-xs md:text-sm mb-3 md:mb-6 line-clamp-2 md:line-clamp-none">
+                          Brioche à la cannelle, glaçage pistache maison. Notre signature, un mariage parfait entre l&apos;onctuosité de la brioche et la subtilité de la pistache.
+                        </p>
+                        <div className="flex items-center justify-between">
+                          <span className="text-lg md:text-xl lg:text-2xl font-bold text-coral">5.50€</span>
+                          <span className="inline-flex items-center gap-2 text-caramel font-medium group-hover:translate-x-2 transition-transform text-sm md:text-base">
+                            Découvrir
+                            <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </div>
 
             {/* Grid for other items */}
             <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-12">
               {siteData.menu.flatMap(cat => cat.items)
                 .filter(item => item.tags?.includes('best-seller') && !item.name.includes('Cinnamon'))
-                .slice(0, 8)
+                .slice(0, 4)
                 .map((item, index) => (
                   <Link
                     key={index}
@@ -332,9 +333,19 @@ export default function HomePage() {
             <div className="text-center">
               <Link
                 href="/menu"
-                className="btn-primary bg-coral hover:bg-caramel w-auto"
+                className="group relative inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 font-semibold rounded-full text-base md:text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1"
               >
-                Voir tout le menu
+                {/* Background avec dégradé animé */}
+                <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
+                {/* Effet de brillance */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
+                {/* Contenu */}
+                <span className="relative text-white drop-shadow-lg">Voir tout le menu</span>
+                <svg className="relative w-5 h-5 md:w-6 md:h-6 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -486,13 +497,15 @@ export default function HomePage() {
 
             {/* CTA */}
             <div className="text-center mt-12">
-              <ModernCTA
+              <Link
                 href="/a-propos#suivez-nous"
-                text="Helen's book en images"
-                icon="arrow"
-                variant="outline"
-                className="w-auto"
-              />
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <span>Helen's book en images</span>
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
             </div>
           </div>
         </section>
@@ -505,7 +518,7 @@ export default function HomePage() {
               <h2 className="heading-md">Avis Google</h2>
 
               {/* Google Rating Badge - Large */}
-              <div className="flex justify-center mb-8">
+              <div className="flex justify-center mb-16">
                 <a
                   href={siteData.socials.googleMaps}
                   target="_blank"
@@ -549,7 +562,7 @@ export default function HomePage() {
 
             <ReviewsDisplay />
 
-            <div className="text-center mt-8">
+            <div className="text-center mt-12">
               <Link
                 href={siteData.socials.googleMaps}
                 target="_blank"
@@ -568,150 +581,13 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Enhanced CTA Section - Redesigned and Moved Before Footer */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-espresso via-coffee to-coffee">
-          {/* Decorative Elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-coral/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-caramel/10 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/5 rounded-full blur-3xl"></div>
-          </div>
-
-          <div className="section-inner relative z-10 px-4 md:px-6 py-8 md:py-12">
-            <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
-                {/* Left Content */}
-                <div className="text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-coral/20 rounded-full text-coral text-xs font-medium mb-4">
-                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    Prêt pour une pause gourmande ?
-                  </div>
-
-                  <h2 className="heading-lg mb-3 md:mb-4 text-cream text-xl md:text-2xl lg:text-3xl">
-                    Une parenthèse douce au cœur<br />du Quartier Latin
-                  </h2>
-
-                  <p className="text-sm md:text-base text-cream/80 mb-4 md:mb-6 leading-relaxed">
-                    Venez découvrir nos pâtisseries faites maison, nos boissons artisanales et notre ambiance cosy.
-                  </p>
-
-                  {/* Quick Info Pills */}
-                  <div className="flex flex-wrap gap-2 mb-6 justify-center lg:justify-start">
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cream/10 rounded-full text-cream/90 text-xs">
-                      <svg className="w-3 h-3 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      Paris 5e
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cream/10 rounded-full text-cream/90 text-xs">
-                      <svg className="w-3 h-3 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      Mar - Dim
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cream/10 rounded-full text-cream/90 text-xs">
-                      <svg className="w-3 h-3 text-caramel" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      Vegan friendly
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <div className="flex justify-center lg:justify-start">
-                    <Link
-                      href="/menu"
-                      className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-full text-base overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1"
-                    >
-                      {/* Background avec dégradé animé */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
-                      {/* Effet de brillance */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
-                      {/* Glow effect */}
-                      <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
-                      {/* Contenu */}
-                      <span className="relative text-white drop-shadow-lg">Voir la carte</span>
-                      <svg className="relative w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Right Visual - Featured Items Mini Grid */}
-                <div className="relative">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&q=80"
-                        alt="Cinnamon Roll Pistache"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Cinnamon Roll</p>
-                        <p className="text-cream text-xs">5.50€</p>
-                      </div>
-                    </div>
-
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=300&q=80"
-                        alt="Cappuccino"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Cappuccino</p>
-                        <p className="text-cream text-xs">3.80€</p>
-                      </div>
-                    </div>
-
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=300&q=80"
-                        alt="Cookie Pistache"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Cookie</p>
-                        <p className="text-cream text-xs">4.00€</p>
-                      </div>
-                    </div>
-
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=300&q=80"
-                        alt="Matcha Latte"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Matcha Latte</p>
-                        <p className="text-cream text-xs">4.50€</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Footer />
       <InfoBar />
 
-      {/* Badge flottant d'ouverture - apparaît au scroll */}
-      <div className={`fixed bottom-20 right-4 z-50 ${
+      {/* Badge flottant d'ouverture - apparaît au scroll (uniquement sur desktop) */}
+      <div className={`hidden md:fixed fixed bottom-20 right-4 z-50 md:block ${
         showFloatingBadge
           ? 'animate-badge-entrance'
           : 'opacity-0 pointer-events-none'
