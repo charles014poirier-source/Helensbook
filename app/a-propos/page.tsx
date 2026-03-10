@@ -92,7 +92,7 @@ export default function AboutPage() {
               <p className="font-hand text-2xl text-coral mb-2">Notre philosophie</p>
               <h2 className="heading-lg mb-4">Ce qui nous anime</h2>
               <p className="text-body max-w-2xl mx-auto">
-                Au cœur d'Helen&#39;s Book, des valeurs simples qui guident chaque journée, chaque création, chaque rencontre.
+                Au cœur d&apos;Helen&#39;s Book, des valeurs simples qui guident chaque journée, chaque création, chaque rencontre.
               </p>
             </div>
 
