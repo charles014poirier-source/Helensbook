@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { InteractiveHoverButton } from '@/components/ui/interactive-hover-button';
 import siteData from '@/lib/siteData';
@@ -33,7 +34,7 @@ export default function Header() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-        <div className="flex items-center justify-center h-16 md:h-20 relative">
+        <div className="flex items-center justify-between h-16 md:h-20 relative">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -65,16 +66,26 @@ export default function Header() {
             </svg>
           </button>
 
-          {/* Logo - Mobile Only */}
-          <Link
-            href="/"
-            className="md:hidden heading-xl text-coffee hover:text-caramel transition-colors"
-          >
-            Helen&apos;s Book
+          {/* Logo - Mobile */}
+          <Link href="/" className="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center py-2">
+            <span className="heading-xl text-coffee hover:text-caramel transition-colors">
+              Helen&apos;s Book
+            </span>
+          </Link>
+
+          {/* Logo - Desktop */}
+          <Link href="/" className="hidden md:flex items-center py-2">
+            <Image
+              src="/image transparente logo.png"
+              alt="Helen's Book"
+              width={280}
+              height={120}
+              className="h-28 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation - Centrée */}
-          <ul className="hidden md:flex items-center gap-10 lg:gap-12">
+          <ul className="hidden md:flex items-center gap-10 lg:gap-12 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link

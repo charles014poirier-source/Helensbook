@@ -170,16 +170,13 @@ export default function HomePage() {
                 <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
                 {/* Contenu */}
                 <span className="relative text-white drop-shadow-lg">Voir la carte</span>
-                <svg className="relative w-4 h-4 md:w-5 md:h-5 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
               </Link>
             </div>
           </div>
 
-          {/* Scroll Indicator - Flèche animée (uniquement desktop) */}
+          {/* Scroll Indicator - Flèche animée */}
           <div
-            className="hidden md:block absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 transition-opacity duration-300 z-10"
+            className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 transition-opacity duration-300 z-10"
             style={{ opacity: 1 - scrollProgress * 2 }}
           >
             <div className="relative w-6 h-10 flex justify-center">

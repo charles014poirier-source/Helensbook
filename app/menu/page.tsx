@@ -36,7 +36,7 @@ export default function MenuPage() {
 
       <main className="pt-20">
         {/* Hero Menu avec image */}
-        <section className="relative py-20 md:py-32 bg-gradient-to-b from-coffee to-espresso">
+        <section className="relative py-24 md:py-40 lg:py-48 bg-gradient-to-b from-coffee to-espresso">
           <div className="absolute inset-0 opacity-20">
             <Image
               src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=80"
@@ -45,42 +45,35 @@ export default function MenuPage() {
               className="object-cover"
             />
           </div>
-          <div className="relative z-10 section-inner">
+          <div className="relative z-10 section-inner px-6 md:px-8">
             <div className="max-w-4xl mx-auto text-center text-cream">
               <p className="font-hand text-2xl text-cream mb-2">Nos créations</p>
               <h1 className="heading-xl mb-6 text-cream">Le Menu</h1>
-              <p className="text-lead text-cream/90 mb-8">
+              <p className="text-lead text-cream/90 mb-12">
                 Des pâtisseries faites maison avec amour, des boissons chaudes réconfortantes.
                 Tout est préparé sur place avec des ingrédients simples et naturels.
               </p>
 
-              {/* Highlights */}
-              <div className="flex flex-wrap justify-center gap-6 mb-10">
-                <div className="flex items-center gap-2 text-cream/80">
-                  <svg className="w-6 h-6 text-caramel" fill="currentColor" viewBox="0 0 20 20">
+              {/* Highlights - mis en valeur */}
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6">
+                <div className="group flex items-center gap-2.5 px-4 py-2.5 bg-white/5 backdrop-blur-[2px] rounded-full border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                  <svg className="w-5 h-5 text-caramel group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm md:text-base font-medium">Fait maison</span>
+                </div>
+                <div className="group flex items-center gap-2.5 px-4 py-2.5 bg-white/5 backdrop-blur-[2px] rounded-full border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                  <svg className="w-5 h-5 text-caramel group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>Fait maison</span>
+                  <span className="text-sm md:text-base font-medium">Ingrédients naturels</span>
                 </div>
-                <div className="flex items-center gap-2 text-cream/80">
-                  <svg className="w-6 h-6 text-caramel" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <div className="group flex items-center gap-2.5 px-4 py-2.5 bg-white/5 backdrop-blur-[2px] rounded-full border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+                  <svg className="w-5 h-5 text-caramel group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                   </svg>
-                  <span>Ingrédients naturels</span>
+                  <span className="text-sm md:text-base font-medium">Préparé sur place</span>
                 </div>
-                <div className="flex items-center gap-2 text-cream/80">
-                  <svg className="w-6 h-6 text-caramel" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>Préparé sur place</span>
-                </div>
-              </div>
-
-              {/* Legend */}
-              <div className="flex flex-wrap justify-center gap-4">
-                <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-cream/10 backdrop-blur-sm text-cream text-sm font-medium rounded-full border border-cream/20">🌱 Vegan</span>
-                <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-cream/10 backdrop-blur-sm text-cream text-sm font-medium rounded-full border border-cream/20">🌾 Sans gluten</span>
-                <span className="inline-flex items-center gap-1.5 px-4 py-2 bg-cream/10 backdrop-blur-sm text-cream text-sm font-medium rounded-full border border-cream/20">⭐ Best-seller</span>
               </div>
             </div>
           </div>

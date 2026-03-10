@@ -8,7 +8,6 @@ import Footer from '@/components/Footer';
 import InfoBar from '@/components/InfoBar';
 import SEOHead from '@/components/SEOHead';
 import siteData from '@/lib/siteData';
-import ValuesGallery from '@/components/ValuesGallery';
 
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -82,10 +81,65 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Values */}
-        <section className="section bg-vanilla">
-          <div className="section-inner">
-            <ValuesGallery values={siteData.values} />
+        {/* Values - Ce qui nous anime */}
+        <section className="section bg-gradient-to-b from-cream to-vanilla relative overflow-hidden">
+          {/* Background decorations */}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-coral/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-sage/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+          <div className="section-inner relative z-10">
+            <div className="text-center mb-12 md:mb-16">
+              <p className="font-hand text-2xl text-coral mb-2">Notre philosophie</p>
+              <h2 className="heading-lg mb-4">Ce qui nous anime</h2>
+              <p className="text-body max-w-2xl mx-auto">
+                Au cœur d'Helen's Book, des valeurs simples qui guident chaque journée, chaque création, chaque rencontre.
+              </p>
+            </div>
+
+            <div className="flex flex-col md:grid md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto items-stretch">
+              {siteData.values.map((value, index) => (
+                <div
+                  key={index}
+                  className="group relative bg-white rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 w-full max-w-sm mx-auto flex flex-col"
+                >
+                  {/* Animated background gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-coral/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+
+                  {/* Icon */}
+                  <div className="relative z-10 w-16 h-16 md:w-20 md:h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-coral to-caramel flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                    <span className="text-3xl md:text-4xl">{value.icon}</span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 text-center flex-grow flex flex-col justify-center">
+                    <h3 className="heading-sm md:heading-lg mb-3 md:mb-4 group-hover:text-coral transition-colors">
+                      {value.title}
+                    </h3>
+                    <p className="text-body text-coffee/70 leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
+
+                  {/* Decorative corner accent */}
+                  <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-2xl">
+                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-coral/10 to-transparent transform rotate-45 translate-x-10 -translate-y-10"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Section */}
+            <div className="text-center mt-12 md:mt-16">
+              <Link
+                href="/menu"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <span>Découvrir nos créations</span>
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -139,9 +193,12 @@ export default function AboutPage() {
                 href={siteData.socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary w-auto"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
               >
-                Voir plus sur Instagram
+                <span>Voir plus sur Instagram</span>
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </a>
             </div>
           </div>

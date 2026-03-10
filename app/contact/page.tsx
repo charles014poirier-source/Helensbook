@@ -6,10 +6,6 @@ import SEOHead from '@/components/SEOHead';
 import siteData from '@/lib/siteData';
 
 export default function ContactPage() {
-  const today = new Date().toLocaleDateString('fr-FR', { weekday: 'long' as const });
-  const todayHours = siteData.openingHours[today as keyof typeof siteData.openingHours] || '';
-  const isOpen = todayHours !== 'Fermé';
-
   // Create Google Maps embed URL
   const mapsEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(siteData.address.street + ', ' + siteData.address.city)}&output=embed`;
 
@@ -86,17 +82,12 @@ export default function ContactPage() {
                 <h3 className="heading-sm mb-4">Horaires</h3>
                 <ul className="text-body space-y-1 text-sm">
                   {Object.entries(siteData.openingHours).map(([day, hours]) => (
-                    <li key={day} className={`flex justify-between gap-4 ${day === today ? 'font-semibold text-caramel' : ''}`}>
+                    <li key={day} className="flex justify-between gap-4">
                       <span className="capitalize">{day}</span>
                       <span>{hours}</span>
                     </li>
                   ))}
                 </ul>
-                <div className="mt-4 pt-4 border-t border-coffee/10">
-                  <p className={`text-sm font-medium ${isOpen ? 'text-sage' : 'text-coffee/60'}`}>
-                    {isOpen ? '🟢 Ouvert actuellement' : '⚫ Fermé actuellement'}
-                  </p>
-                </div>
               </div>
 
               {/* Contact */}
