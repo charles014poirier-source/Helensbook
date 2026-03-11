@@ -118,15 +118,15 @@ export default function HomePage() {
 
           {/* Content - Centré avec transition au scroll */}
           <div
-            className="relative z-10 px-6 sm:px-8 md:px-12 lg:px-16 max-w-5xl mx-auto text-center transition-all duration-75 ease-out will-change-transform"
+            className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 w-full max-w-6xl mx-auto text-center transition-all duration-75 ease-out will-change-transform"
             style={{
               opacity: 1 - scrollProgress * 0.7,
               transform: `translateY(${scrollProgress * 50}px) scale(${1 - scrollProgress * 0.1})`
             }}
           >
             {/* Badge dynamique d'ouverture */}
-            <div className="mb-6 md:mb-8 lg:mb-10 mt-4 md:mt-6 lg:mt-8 flex justify-center" style={{ animation: 'badge-entrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both' }}>
-              <span className={`inline-flex items-center gap-2 md:gap-2.5 lg:gap-3 px-3 md:px-5 lg:px-6 py-1.5 md:py-2 lg:py-2.5 backdrop-blur-sm rounded-full text-xs md:text-sm lg:text-base font-semibold shadow-lg ${
+            <div className="mb-6 md:mb-10 lg:mb-12 mt-2 md:mt-8 lg:mt-10 flex justify-center" style={{ animation: 'badge-entrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both' }}>
+              <span className={`inline-flex items-center gap-2 md:gap-2.5 lg:gap-3 px-4 md:px-5 lg:px-6 py-2 md:py-2.5 lg:py-3 backdrop-blur-sm rounded-full text-xs md:text-sm lg:text-base font-semibold shadow-lg ${
                 isOpen
                   ? 'bg-sage/90 text-white animate-badge-glow-open'
                   : 'bg-coffee/70 text-white/70'
@@ -137,30 +137,30 @@ export default function HomePage() {
             </div>
 
             {/* Titre avec style moderne */}
-            <h1 className="heading-xl mb-4 md:mb-6 lg:mb-8 animate-slide-up text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ animationDelay: '0.1s' }}>
+            <h1 className="heading-xl mb-3 md:mb-8 lg:mb-10 animate-slide-up text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight drop-shadow-2xl" style={{ animationDelay: '0.1s' }}>
               {h1}
             </h1>
 
             {/* Slogan */}
-            <p className="animate-slide-up text-lg md:text-2xl lg:text-3xl text-white/90 font-light mb-6 md:mb-10 lg:mb-14 max-w-2xl mx-auto leading-relaxed drop-shadow-lg" style={{ animationDelay: '0.2s' }}>
+            <p className="animate-slide-up text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 font-light mb-10 md:mb-12 lg:mb-16 max-w-3xl mx-auto leading-relaxed drop-shadow-lg px-2" style={{ animationDelay: '0.2s' }}>
               {slogan}
             </p>
 
             {/* Highlights - Design épuré et élégant */}
-            <div className="animate-slide-up flex flex-wrap justify-center gap-2 md:gap-2.5 lg:gap-3 mb-6 md:mb-8 lg:mb-10" style={{ animationDelay: '0.3s' }}>
+            <div className="animate-slide-up flex flex-wrap justify-center gap-2.5 md:gap-3 lg:gap-4 mb-10 md:mb-10 lg:mb-12 px-2" style={{ animationDelay: '0.3s' }}>
               {siteData.highlights.slice(0, 3).map((highlight, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center gap-1 md:gap-1.5 lg:gap-2 px-2.5 md:px-3.5 lg:px-4 py-1 md:py-1.5 lg:py-2 bg-white/15 backdrop-blur-md rounded-full text-xs md:text-xs lg:text-sm font-medium text-white/95 border border-white/20 shadow-sm cursor-default"
+                  className="inline-flex items-center gap-1.5 md:gap-2 lg:gap-2.5 px-3 md:px-4 lg:px-5 py-1.5 md:py-2 lg:py-2.5 bg-white/15 backdrop-blur-md rounded-full text-xs md:text-sm lg:text-base font-medium text-white/95 border border-white/20 shadow-sm cursor-default"
                 >
-                  <span className="text-xs md:text-sm lg:text-base">{highlight.icon}</span>
+                  <span className="text-sm md:text-base lg:text-lg">{highlight.icon}</span>
                   {highlight.text}
                 </span>
               ))}
             </div>
 
             {/* CTA - Design moderne et accrocheur */}
-            <div className="animate-slide-up flex flex-wrap justify-center gap-3 md:gap-4" style={{ animationDelay: '0.4s' }}>
+            <div className="animate-slide-up flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-5 px-4" style={{ animationDelay: '0.4s' }}>
               <Link href="/menu" className="group relative inline-flex items-center gap-2 md:gap-3 lg:gap-4 px-6 md:px-8 lg:px-10 py-3 md:py-4 lg:py-5 font-bold rounded-full text-base md:text-lg lg:text-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1">
                 {/* Background avec dégradé animé */}
                 <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
@@ -174,27 +174,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Scroll Indicator - Flèche animée */}
-          <div
-            className="absolute bottom-20 md:bottom-24 left-1/2 -translate-x-1/2 transition-opacity duration-300 z-10"
-            style={{ opacity: 1 - scrollProgress * 2 }}
-          >
-            <div className="relative w-6 h-10 flex justify-center">
-              <svg
-                className="w-6 h-6 animate-bounce text-white/60"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
-            </div>
-          </div>
         </section>
 
         {/* Incontournables - Redesigned Section */}

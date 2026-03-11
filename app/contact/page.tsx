@@ -147,9 +147,12 @@ export default function ContactPage() {
               </p>
               <a
                 href={`mailto:${siteData.email}?subject=Privatisation - Helen's Book`}
-                className="btn-primary w-auto"
+                className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
               >
-                Nous contacter
+                <span>Nous contacter</span>
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </a>
             </div>
           </div>

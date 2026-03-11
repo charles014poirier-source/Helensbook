@@ -74,13 +74,13 @@ export default function Header() {
           </Link>
 
           {/* Logo - Desktop */}
-          <Link href="/" className="hidden md:flex items-center py-2">
+          <Link href="/" className="hidden md:flex items-center py-2 pt-10">
             <Image
               src="/image transparente logo.png"
               alt="Helen's Book"
               width={280}
               height={120}
-              className="h-28 w-auto object-contain"
+              className="h-32 w-auto object-contain"
             />
           </Link>
 
@@ -96,7 +96,7 @@ export default function Header() {
                     {item.label}
                   </span>
                   {/* Underline animation */}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-caramel transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-1 left-0 w-0 h-1 bg-caramel transition-all duration-300 group-hover:w-full origin-left"></span>
                 </Link>
               </li>
             ))}
@@ -129,15 +129,24 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
-              <li className="pt-2 border-t border-coffee/10">
+              <li className="pt-2 border-t border-coffee/10 flex justify-center">
                 <a
                   href={siteData.socials.googleMaps}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary w-full text-center"
+                  className="group relative w-auto text-center inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-caramel to-caramel/90 text-white text-sm font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Nous trouver
+                  {/* Effet de brillance */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer" />
+                  {/* Texture subtile */}
+                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNCIgaGVpZ2h0PSI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxjaXJjbGUgY3x9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSJ3aGl0ZSIgZmlsbC1vcGFjaXR5PSIwLjEiLz48L3N2Zz4=')] opacity-30" />
+                  {/* Icône de localisation */}
+                  <svg className="relative w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span className="relative">Nous trouver</span>
                 </a>
               </li>
             </ul>

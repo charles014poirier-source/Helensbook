@@ -246,135 +246,130 @@ export default function AboutPage() {
         </section>
 
         {/* Enhanced CTA Section - Prêt pour une parenthèse gourmande ? */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-espresso via-coffee to-coffee">
-          {/* Decorative Elements */}
+        <section className="relative overflow-hidden bg-vanilla">
+          {/* Subtle background decorations */}
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-coral/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-caramel/10 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/5 rounded-full blur-3xl"></div>
+            <div className="absolute -top-32 -right-32 w-96 h-96 bg-coral/10 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-caramel/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sage/5 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="section-inner relative z-10 px-4 md:px-6 py-8 md:py-12">
-            <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
-                {/* Left Content */}
-                <div className="text-center lg:text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-coral/20 rounded-full text-coral text-xs font-medium mb-4">
-                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    Prêt pour une pause gourmande ?
+          {/* Glassmorphism card container */}
+          <div className="section-inner relative z-10 px-4 md:px-6 py-12 md:py-20">
+            <div className="max-w-6xl mx-auto">
+              {/* Main glass card */}
+              <div className="relative bg-white/70 backdrop-blur-xl rounded-3xl md:rounded-4xl overflow-hidden shadow-2xl border border-white/40">
+                {/* Internal gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-white/50"></div>
+
+                {/* Content grid */}
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 p-8 md:p-12">
+
+                  {/* Left Content */}
+                  <div className="text-center lg:text-left space-y-6">
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-coral to-caramel rounded-full shadow-md">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-white rounded-full animate-ping opacity-30"></div>
+                        <svg className="relative w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      </div>
+                      <span className="text-sm font-medium text-white">Prêt pour une pause gourmande ?</span>
+                    </div>
+
+                    {/* Title with gradient text effect */}
+                    <h2 className="heading-lg text-2xl md:text-3xl lg:text-4xl text-coffee leading-tight">
+                      Une parenthèse douce au cœur du <span className="text-transparent bg-clip-text bg-gradient-to-r from-coral to-caramel">Quartier Latin</span>
+                    </h2>
+
+                    {/* Description */}
+                    <p className="text-base md:text-lg text-coffee/80 leading-relaxed max-w-xl">
+                      Venez découvrir nos pâtisseries faites maison, nos boissons artisanales et notre ambiance cosy. Un moment de détente garanti.
+                    </p>
+
+                    {/* Enhanced info pills */}
+                    <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                      <div className="group flex items-center gap-2 px-4 py-2 bg-coffee/5 backdrop-blur-sm rounded-full border border-coffee/10 hover:bg-coffee/10 transition-all duration-300">
+                        <svg className="w-4 h-4 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span className="text-sm font-medium text-coffee">Paris 5e</span>
+                      </div>
+                      <div className="group flex items-center gap-2 px-4 py-2 bg-coffee/5 backdrop-blur-sm rounded-full border border-coffee/10 hover:bg-coffee/10 transition-all duration-300">
+                        <svg className="w-4 h-4 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="text-sm font-medium text-coffee">Mar - Dim</span>
+                      </div>
+                      <div className="group flex items-center gap-2 px-4 py-2 bg-coffee/5 backdrop-blur-sm rounded-full border border-coffee/10 hover:bg-coffee/10 transition-all duration-300">
+                        <svg className="w-4 h-4 text-coral" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-sm font-medium text-coffee">Vegan</span>
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <div className="flex justify-center lg:justify-start pt-4">
+                      <Link
+                        href="/menu"
+                        className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold rounded-full text-base md:text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl"
+                      >
+                        {/* Background with animated gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
+                        {/* Shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shine"></div>
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 rounded-full blur-2xl bg-coral/40 group-hover:bg-coral/60 transition-all duration-300 -z-10"></div>
+                        {/* Content */}
+                        <span className="relative text-white drop-shadow-lg">Voir la carte</span>
+                        <svg className="relative w-5 h-5 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
 
-                  <h2 className="heading-lg mb-3 md:mb-4 text-cream text-xl md:text-2xl lg:text-3xl">
-                    Une parenthèse douce au cœur du Quartier Latin
-                  </h2>
+                  {/* Right Visual - Enhanced product grid */}
+                  <div className="relative">
+                    {/* Decorative background shapes */}
+                    <div className="absolute -top-4 -right-4 w-24 h-24 bg-coral/20 rounded-full blur-2xl"></div>
+                    <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-caramel/20 rounded-full blur-2xl"></div>
 
-                  <p className="text-sm md:text-base text-cream/80 mb-4 md:mb-6 leading-relaxed">
-                    Venez découvrir nos pâtisseries faites maison, nos boissons artisanales et notre ambiance cosy.
-                  </p>
-
-                  {/* Quick Info Pills */}
-                  <div className="flex flex-wrap gap-2 mb-6 justify-center lg:justify-start">
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cream/10 rounded-full text-cream/90 text-xs">
-                      <svg className="w-3 h-3 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      Paris 5e
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cream/10 rounded-full text-cream/90 text-xs">
-                      <svg className="w-3 h-3 text-caramel" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      Mar - Dim
-                    </div>
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 bg-cream/10 rounded-full text-cream/90 text-xs">
-                      <svg className="w-3 h-3 text-caramel" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      Vegan friendly
-                    </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <div className="flex justify-center lg:justify-start">
-                    <Link
-                      href="/menu"
-                      className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-full text-base overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1"
-                    >
-                      {/* Background avec dégradé animé */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
-                      {/* Effet de brillance */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
-                      {/* Glow effect */}
-                      <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
-                      {/* Contenu */}
-                      <span className="relative text-white drop-shadow-lg">Voir la carte</span>
-                      <svg className="relative w-4 h-4 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-
-                {/* Right Visual - Featured Items Mini Grid */}
-                <div className="relative">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&q=80"
-                        alt="Cinnamon Roll Pistache"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Cinnamon Roll</p>
-                        <p className="text-cream text-xs">5.50€</p>
-                      </div>
-                    </div>
-
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=300&q=80"
-                        alt="Cappuccino"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Cappuccino</p>
-                        <p className="text-cream text-xs">3.80€</p>
-                      </div>
-                    </div>
-
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=300&q=80"
-                        alt="Cookie Pistache"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Cookie</p>
-                        <p className="text-cream text-xs">4.00€</p>
-                      </div>
-                    </div>
-
-                    <div className="relative aspect-square rounded-xl overflow-hidden shadow-lg group">
-                      <Image
-                        src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=300&q=80"
-                        alt="Matcha Latte"
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-2 left-2 right-2">
-                        <p className="text-cream font-medium text-xs">Matcha Latte</p>
-                        <p className="text-cream text-xs">4.50€</p>
-                      </div>
+                    {/* Product grid with hover effects */}
+                    <div className="grid grid-cols-2 gap-4 md:gap-6">
+                      {[
+                        { img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80', name: 'Cinnamon Roll', price: '5.50€', tag: 'Best-seller' },
+                        { img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80', name: 'Cappuccino', price: '3.80€', tag: null },
+                        { img: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?w=400&q=80', name: 'Cookie', price: '4.00€', tag: '🌱' },
+                        { img: 'https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400&q=80', name: 'Matcha Latte', price: '4.50€', tag: null },
+                      ].map((item, index) => (
+                        <div key={index} className="group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                          <Image
+                            src={item.img}
+                            alt={item.name}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-700"
+                          />
+                          {/* Gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-espresso/90 via-espresso/40 to-transparent"></div>
+                          {/* Tag */}
+                          {item.tag && (
+                            <div className="absolute top-2 left-2 px-2 py-1 bg-coral/90 backdrop-blur-sm rounded-full">
+                              <span className="text-xs font-bold text-white">{item.tag}</span>
+                            </div>
+                          )}
+                          {/* Content */}
+                          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                            <p className="text-cream font-bold text-sm md:text-base mb-0.5">{item.name}</p>
+                            <p className="text-caramel font-semibold text-xs md:text-sm">{item.price}</p>
+                          </div>
+                          {/* Shine effect on hover */}
+                          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
