@@ -15,8 +15,13 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 export default function HomePage() {
   const [showFloatingBadge, setShowFloatingBadge] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [mosaicRef, isScrollVisible] = useScrollAnimation();
   const [bestSellerRef, isBestSellerVisible] = useScrollAnimation();
+
+  // Section refs pour animations au scroll
+  const [incontournablesRef, isIncontournablesVisible] = useScrollAnimation();
+  const [storyRef, isStoryVisible] = useScrollAnimation();
+  const [galleryRef, isGalleryVisible] = useScrollAnimation();
+  const [reviewsRef, isReviewsVisible] = useScrollAnimation();
   const slogan = siteData.slogans[siteData.selectedSlogan];
 
   // Gérer l'affichage du badge flottant et la transition au scroll
@@ -161,15 +166,11 @@ export default function HomePage() {
 
             {/* CTA - Design moderne et accrocheur */}
             <div className="animate-slide-up flex flex-wrap justify-center gap-3 md:gap-4 lg:gap-5 px-4" style={{ animationDelay: '0.4s' }}>
-              <Link href="/menu" className="group relative inline-flex items-center gap-2 md:gap-3 lg:gap-4 px-6 md:px-8 lg:px-10 py-3 md:py-4 lg:py-5 font-bold rounded-full text-base md:text-lg lg:text-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-                {/* Background avec dégradé animé */}
-                <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
-                {/* Effet de brillance */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
-                {/* Contenu */}
-                <span className="relative text-white drop-shadow-lg">Voir la carte</span>
+              <Link href="/menu" className="cta-gradient">
+                <span>Voir la carte</span>
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </Link>
             </div>
           </div>
@@ -178,20 +179,19 @@ export default function HomePage() {
 
         {/* Incontournables - Redesigned Section */}
         <section
-          className="section bg-gradient-to-b from-cream to-vanilla transition-all duration-75 ease-out will-change-transform"
-          style={{
-            transform: `translateY(${Math.max(0, (1 - scrollProgress) * 50)}px)`,
-            opacity: Math.min(1, scrollProgress * 2)
-          }}
+          ref={incontournablesRef}
+          className={`section bg-gradient-to-b from-cream to-vanilla soft-section ${
+            isIncontournablesVisible ? 'is-visible' : ''
+          }`}
         >
           <div className="section-inner">
             {/* Section Header */}
             <div className="text-center mb-16">
-              <span className="inline-block px-4 py-2 bg-coral/15 rounded-full text-coral font-medium text-sm mb-4">
+              <span className="inline-block px-4 py-2 bg-coral/15 rounded-full text-coral font-medium text-sm mb-4 soft-reveal">
                 ★ Nos favoris
               </span>
-              <h2 className="heading-lg mb-4">Les Incontournables</h2>
-              <p className="text-body max-w-2xl mx-auto">
+              <h2 className="heading-lg mb-4 soft-reveal" style={{animationDelay: '0.1s'}}>Les Incontournables</h2>
+              <p className="text-body max-w-2xl mx-auto soft-reveal" style={{animationDelay: '0.2s'}}>
                 Découvrez nos créations les plus appréciées, un équilibre parfait entre gourmandise et légèreté.
               </p>
             </div>
@@ -200,7 +200,7 @@ export default function HomePage() {
             <div className="mb-8 md:mb-12">
               <div ref={bestSellerRef} className={isBestSellerVisible ? 'is-visible' : 'animate-on-scroll'}>
                 <Link href="/menu" className="group block">
-                  <div className={`relative bg-vanilla rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 ${
+                  <div className={`relative bg-vanilla rounded-2xl md:rounded-3xl overflow-hidden hover-lift ${
                     isBestSellerVisible ? 'animate-bestseller-entrance' : 'opacity-0 translate-y-16'
                   }`}>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
@@ -244,7 +244,9 @@ export default function HomePage() {
             </div>
 
             {/* Grid for other items */}
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-12">
+            <div className={`grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 mb-12 card-stagger ${
+              isIncontournablesVisible ? 'is-visible' : ''
+            }`}>
               {siteData.menu.flatMap(cat => cat.items)
                 .filter(item => item.tags?.includes('best-seller') && !item.name.includes('Cinnamon'))
                 .slice(0, 4)
@@ -254,7 +256,7 @@ export default function HomePage() {
                     href="/menu"
                     className="group"
                   >
-                    <div className="card overflow-hidden hover:shadow-xl transition-all duration-300 group-hover:-translate-y-1">
+                    <div className="card overflow-hidden hover-lift">
                       <div className="aspect-square overflow-hidden relative">
                         <Image
                           src={
@@ -270,7 +272,7 @@ export default function HomePage() {
                           }
                           alt={item.name}
                           fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="object-cover hover-scale"
                         />
                         {item.tags?.includes('best-seller') && (
                           <div className="absolute top-2 right-2 md:top-3 md:right-3">
@@ -307,19 +309,9 @@ export default function HomePage() {
 
             {/* CTA Button */}
             <div className="text-center">
-              <Link
-                href="/menu"
-                className="group relative inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 font-semibold rounded-full text-base md:text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1"
-              >
-                {/* Background avec dégradé animé */}
-                <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
-                {/* Effet de brillance */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
-                {/* Contenu */}
-                <span className="relative text-white drop-shadow-lg">Voir tout le menu</span>
-                <svg className="relative w-5 h-5 md:w-6 md:h-6 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <Link href="/menu" className="cta-elevated">
+                <span>Voir tout le menu</span>
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
@@ -328,15 +320,15 @@ export default function HomePage() {
         </section>
 
         {/* L'esprit Helen's Book */}
-        <section className="section bg-vanilla">
+        <section ref={storyRef} className={`section bg-vanilla soft-section ${isStoryVisible ? 'is-visible' : ''}`}>
           <div className="section-inner">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center stagger-soft ${isStoryVisible ? 'is-visible' : ''}`}>
               <div className="order-2 lg:order-1">
-                <p className="font-hand text-2xl text-coral mb-2">Notre histoire</p>
-                <h2 className="heading-lg mb-6">{siteData.story.title}</h2>
+                <p className="font-hand text-2xl text-coral mb-2 slide-in-left">Notre histoire</p>
+                <h2 className="heading-lg mb-6 slide-in-left" style={{animationDelay: '0.1s'}}>{siteData.story.title}</h2>
                 <div className="prose prose-lg text-coffee/70">
                   {siteData.story.content.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="text-body mb-4">
+                    <p key={index} className="text-body mb-4 soft-reveal" style={{animationDelay: `${0.2 + index * 0.15}s`}}>
                       {paragraph.trim()}
                     </p>
                   ))}
@@ -344,7 +336,7 @@ export default function HomePage() {
 
                 <div className="flex flex-wrap gap-4 mt-8">
                   {siteData.values.slice(0, 3).map((value, index) => (
-                    <div key={index} className="flex items-center gap-2">
+                    <div key={index} className="flex items-center gap-2 soft-reveal" style={{animationDelay: `${0.5 + index * 0.1}s`}}>
                       <span className="text-2xl">{value.icon}</span>
                       <span className="font-medium text-coffee">{value.title}</span>
                     </div>
@@ -352,12 +344,9 @@ export default function HomePage() {
                 </div>
 
                 <div className="text-center lg:text-left mt-12">
-                  <Link
-                    href="/a-propos"
-                    className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
-                  >
+                  <Link href="/a-propos" className="cta-primary">
                     <span>En savoir plus</span>
-                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
@@ -365,12 +354,12 @@ export default function HomePage() {
               </div>
 
               <div className="order-1 lg:order-2">
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg">
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-lg hover-lift">
                   <Image
                     src="/en%20savoir%20plus.jpeg"
                     alt="Intérieur cosy d'Helen's Book avec livres et café"
                     fill
-                    className="object-cover"
+                    className="object-cover hover-scale"
                   />
                 </div>
               </div>
@@ -379,21 +368,21 @@ export default function HomePage() {
         </section>
 
         {/* En images - Mosaïque */}
-        <section className="section bg-vanilla">
+        <section ref={galleryRef} className={`section bg-vanilla soft-section ${isGalleryVisible ? 'is-visible' : ''}`}>
           <div className="section-inner">
             {/* Header */}
             <div className="text-center mb-12">
-              <p className="font-hand text-2xl text-caramel mb-2">En images</p>
-              <h2 className="heading-md mb-4">Helen&apos;s book en images</h2>
-              <p className="text-body max-w-2xl mx-auto">
+              <p className="font-hand text-2xl text-caramel mb-2 soft-reveal">En images</p>
+              <h2 className="heading-md mb-4 soft-reveal" style={{animationDelay: '0.1s'}}>Helen&apos;s book en images</h2>
+              <p className="text-body max-w-2xl mx-auto soft-reveal" style={{animationDelay: '0.2s'}}>
                 Découvrez notre univers en images, entre pâtisseries gourmandes et ambiance cosy.
               </p>
             </div>
 
             {/* Mosaïque avec animation */}
-            <div ref={mosaicRef} className="relative">
+            <div className="relative">
               {/* Mobile - Grid 2 colonnes */}
-              <div className="grid grid-cols-2 gap-2 md:hidden">
+              <div className={`grid grid-cols-2 gap-2 md:hidden card-stagger ${isGalleryVisible ? 'is-visible' : ''}`}>
                 {siteData.gallery.slice(0, 6).map((image, index) => {
                   // Pattern pour mosaïque mobile: 0=2x2, 1=1x1, 2=1x1, 3=2x1, 4=1x1, 5=1x1
                   const isLarge = index === 0;
@@ -407,19 +396,14 @@ export default function HomePage() {
                         ${isWide ? 'col-span-2' : ''}
                       `}
                     >
-                      <div
-                        className={`
-                          relative overflow-hidden rounded-xl group
-                          ${isScrollVisible ? 'is-visible' : 'animate-on-scroll'}
-                        `}
-                      >
+                      <div className="relative overflow-hidden rounded-xl group hover-lift">
                         <div className={`relative ${isLarge ? 'aspect-square' : isWide ? 'aspect-[2/1]' : 'aspect-square'}`}>
                           <Image
                             src={image.src}
                             alt={image.alt}
                             width={image.width || 600}
                             height={image.height || 400}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-cover hover-scale"
                           />
                         </div>
                       </div>
@@ -429,7 +413,7 @@ export default function HomePage() {
               </div>
 
               {/* Desktop - Grid 3-4 colonnes avec mosaïque asymétrique */}
-              <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+              <div className={`hidden md:grid md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6 card-stagger ${isGalleryVisible ? 'is-visible' : ''}`}>
                 {siteData.gallery.slice(0, 6).map((image, index) => {
                   // Pattern pour mosaïque desktop:
                   // index 0: 2x2 (grande)
@@ -449,19 +433,14 @@ export default function HomePage() {
                         ${isWide ? 'md:col-span-2 lg:col-span-2' : ''}
                       `}
                     >
-                      <div
-                        className={`
-                          relative overflow-hidden rounded-xl group
-                          ${isScrollVisible ? 'is-visible' : 'animate-on-scroll'}
-                        `}
-                      >
+                      <div className="relative overflow-hidden rounded-xl group hover-lift">
                         <div className={`relative ${isLarge ? 'aspect-square' : isWide ? 'aspect-[2/1]' : 'aspect-square'}`}>
                           <Image
                             src={image.src}
                             alt={image.alt}
                             width={image.width || 600}
                             height={image.height || 400}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="w-full h-full object-cover hover-scale"
                           />
                         </div>
                       </div>
@@ -473,12 +452,9 @@ export default function HomePage() {
 
             {/* CTA */}
             <div className="text-center mt-12">
-              <Link
-                href="/a-propos#suivez-nous"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
-              >
+              <Link href="/a-propos#suivez-nous" className="cta-glow">
                 <span>Helen&#39;s book en images</span>
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
@@ -487,11 +463,11 @@ export default function HomePage() {
         </section>
 
         {/* Social Proof - Google Reviews - Moved to Bottom */}
-        <section className="section bg-vanilla">
+        <section ref={reviewsRef} className={`section bg-vanilla soft-section ${isReviewsVisible ? 'is-visible' : ''}`}>
           <div className="section-inner">
             <div className="text-center mb-12">
-              <p className="font-hand text-2xl text-coral mb-2">Ce qu&apos;ils disent de nous</p>
-              <h2 className="heading-md">Avis Google</h2>
+              <p className="font-hand text-2xl text-coral mb-2 soft-reveal">Ce qu&apos;ils disent de nous</p>
+              <h2 className="heading-md soft-reveal" style={{animationDelay: '0.1s'}}>Avis Google</h2>
 
               {/* Google Rating Badge - Large */}
               <div className="flex justify-center mb-16">
@@ -499,7 +475,7 @@ export default function HomePage() {
                   href={siteData.socials.googleMaps}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-4 px-6 py-4 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group"
+                  className="inline-flex items-center gap-4 px-6 py-4 bg-white rounded-2xl shadow-lg hover-lift group"
                 >
                   {/* Google Logo */}
                   <svg className="w-8 h-8" viewBox="0 0 24 24">
@@ -531,25 +507,24 @@ export default function HomePage() {
                 </a>
               </div>
 
-              <p className="text-body mt-4 max-w-2xl mx-auto">
+              <p className="text-body mt-4 max-w-2xl mx-auto soft-reveal" style={{animationDelay: '0.2s'}}>
                 Découvrez les avis de nos clients sur Google. Votre avis nous tient à cœur !
               </p>
             </div>
 
-            <ReviewsDisplay />
+            <div className={`stagger-soft ${isReviewsVisible ? 'is-visible' : ''}`}>
+              <ReviewsDisplay />
+            </div>
 
             <div className="text-center mt-12">
               <Link
                 href={siteData.socials.googleMaps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 md:py-4 font-semibold rounded-full text-base md:text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1"
+                className="cta-gradient"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shine"></div>
-                <div className="absolute inset-0 rounded-full blur-xl bg-coral/30 group-hover:bg-coral/50 transition-all duration-300 -z-10"></div>
-                <span className="relative text-white drop-shadow-lg">Laisser un avis sur Google</span>
-                <svg className="relative w-4 h-4 md:w-5 md:h-5 text-white group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                <span>Laisser un avis sur Google</span>
+                <svg className="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
               </Link>

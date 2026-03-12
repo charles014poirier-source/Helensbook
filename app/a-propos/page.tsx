@@ -8,9 +8,17 @@ import Footer from '@/components/Footer';
 import InfoBar from '@/components/InfoBar';
 import SEOHead from '@/components/SEOHead';
 import siteData from '@/lib/siteData';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Section refs pour animations au scroll
+  const [storyRef, isStoryVisible] = useScrollAnimation();
+  const [valuesRef, isValuesVisible] = useScrollAnimation();
+  const [instagramRef, isInstagramVisible] = useScrollAnimation();
+  const [faqRef, isFaqVisible] = useScrollAnimation();
+  const [ctaRef, isCtaVisible] = useScrollAnimation();
 
   return (
     <>
@@ -33,7 +41,7 @@ export default function AboutPage() {
         </section>
 
         {/* Story - Biographie */}
-        <section className="section">
+        <section ref={storyRef} className={`section ${isStoryVisible ? 'is-visible' : 'section-animate'}`}>
           <div className="section-inner">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               {/* Texte biographique */}
@@ -46,8 +54,7 @@ export default function AboutPage() {
                     où le temps s&apos;arrête un peu. Une parenthèse douce entre deux pages, entre deux gorgées de café.
                   </p>
                   <p className="text-body">
-                    Ici, tout est fait maison — nos pâtisr
-                    iers arrivent avant l&apos;aube pour préparer
+                    Ici, tout est fait maison — nos pâtissiers arrivent avant l&apos;aube pour préparer
                     cinnamon rolls, cookies et autres gourmandises. Majoritairement vegan, jamais trop sucré,
                     toujours avec amour.
                   </p>
@@ -82,7 +89,7 @@ export default function AboutPage() {
         </section>
 
         {/* Values - Ce qui nous anime */}
-        <section className="section bg-gradient-to-b from-cream to-vanilla relative overflow-hidden">
+        <section ref={valuesRef} className={`section bg-gradient-to-b from-cream to-vanilla relative overflow-hidden ${isValuesVisible ? 'is-visible' : 'section-animate'}`}>
           {/* Background decorations */}
           <div className="absolute top-0 left-0 w-96 h-96 bg-coral/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-sage/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
@@ -96,7 +103,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="flex flex-col md:grid md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto items-stretch">
+            <div className={`flex flex-col md:grid md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto items-stretch ${isValuesVisible ? 'is-visible stagger-children' : 'stagger-children'}`}>
               {siteData.values.map((value, index) => (
                 <div
                   key={index}
@@ -130,12 +137,9 @@ export default function AboutPage() {
 
             {/* CTA Section */}
             <div className="text-center mt-12 md:mt-16">
-              <Link
-                href="/menu"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
-              >
+              <Link href="/menu" className="cta-elevated">
                 <span>Découvrir nos créations</span>
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </Link>
@@ -144,7 +148,7 @@ export default function AboutPage() {
         </section>
 
         {/* Instagram Feed */}
-        <section id="suivez-nous" className="section">
+        <section ref={instagramRef} id="suivez-nous" className={`section ${isInstagramVisible ? 'is-visible' : 'section-animate'}`}>
           <div className="section-inner">
             <div className="text-center mb-12">
               <p className="font-hand text-2xl text-caramel mb-2">Suivez-nous</p>
@@ -154,7 +158,7 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8 ${isInstagramVisible ? 'is-visible stagger-children' : 'stagger-children'}`}>
               {[
                 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80',
                 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80',
@@ -193,10 +197,10 @@ export default function AboutPage() {
                 href={siteData.socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-coral text-white rounded-full font-semibold transition-all duration-300 hover:bg-caramel hover:scale-105 hover:-translate-y-1 hover:shadow-lg"
+                className="cta-glow"
               >
                 <span>Voir plus sur Instagram</span>
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
@@ -205,7 +209,7 @@ export default function AboutPage() {
         </section>
 
         {/* FAQ */}
-        <section className="section">
+        <section ref={faqRef} className={`section ${isFaqVisible ? 'is-visible' : 'section-animate'}`}>
           <div className="section-inner">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
@@ -213,7 +217,7 @@ export default function AboutPage() {
                 <h2 className="heading-lg">FAQ</h2>
               </div>
 
-              <div className="space-y-4">
+              <div className={`space-y-4 ${isFaqVisible ? 'is-visible stagger-children' : 'stagger-children'}`}>
                 {siteData.faq.map((item, index) => (
                   <div key={index} className="card overflow-hidden">
                     <button
@@ -246,7 +250,7 @@ export default function AboutPage() {
         </section>
 
         {/* Enhanced CTA Section - Prêt pour une parenthèse gourmande ? */}
-        <section className="relative overflow-hidden bg-vanilla">
+        <section ref={ctaRef} className={`relative overflow-hidden bg-vanilla ${isCtaVisible ? 'is-visible' : 'section-animate'}`}>
           {/* Subtle background decorations */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-32 -right-32 w-96 h-96 bg-coral/10 rounded-full blur-3xl"></div>
@@ -313,19 +317,9 @@ export default function AboutPage() {
 
                     {/* CTA Button */}
                     <div className="flex justify-center lg:justify-start pt-4">
-                      <Link
-                        href="/menu"
-                        className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 font-semibold rounded-full text-base md:text-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-xl hover:shadow-2xl"
-                      >
-                        {/* Background with animated gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-coral via-caramel to-coral bg-[length:200%_100%] animate-shimmer group-hover:bg-[length:100%_100%] transition-all duration-700"></div>
-                        {/* Shine effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shine"></div>
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 rounded-full blur-2xl bg-coral/40 group-hover:bg-coral/60 transition-all duration-300 -z-10"></div>
-                        {/* Content */}
-                        <span className="relative text-white drop-shadow-lg">Voir la carte</span>
-                        <svg className="relative w-5 h-5 text-white group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <Link href="/menu" className="cta-gradient">
+                        <span>Voir la carte</span>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
                       </Link>
